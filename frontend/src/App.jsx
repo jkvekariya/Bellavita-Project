@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
 import  { BrowserRouter as Router,Route,Routes,} from "react-router-dom"; 
-import Home from './component/pages/home/Home'
-import Nopage from './component/pages/noPage/NoPage'
+import Home from './component/pages/home/Home';
+import Nopage from './component/pages/noPage/NoPage';
 import ProductInfo from './component/pages/productInfo/ProductInfo';
 import BestSellers from './component/pages/bestsellers/BestSellers';
 import AllProduct from './component/pages/shopall/Shoall';
@@ -34,8 +33,6 @@ import Gifting from './component/pages/gifting/Gifting';
 import Bodywashes from './component/category/Bodywashes';
 import Bodylotions from './component/category/Bodylotions';
 import Bodydeos from './component/category/Bodydeos';
-import Context from './component/context/Context';
-import Api from './Apis/backendApi';
 import CheckoutPage from './component/pages/cart/CheckoutPage ';
 import AddressForm from './component/pages/cart/AddressForm';
 import SearchBar from './component/searchbar/SearchBar';
@@ -48,45 +45,6 @@ import { ContextProvider } from "./component/context/Context";
 
 const App = () => {
   
- const [cartCount, setCartCount] = useState(0);
-  const [wishlistCount, setWishlistCount] = useState(0);
-
-  const fetchCartCount = async () => {
-    try {
-      const res = await fetch(Api.getCartItemCount.url, {
-        method: Api.getCartItemCount.method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await res.json();
-      if (res.ok) setCartCount(data.count || 0);
-    } catch (err) {
-      console.error("Failed to fetch cart count:", err);
-    }
-  };
-
-  const fetchWishlistCount = async () => {
-    try {
-      const res = await fetch(Api.getWishlistItemCount.url, {
-        method: Api.getWishlistItemCount.method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await res.json();
-      if (res.ok) setWishlistCount(data.count || 0);
-    } catch (err) {
-      console.error("Failed to fetch wishlist count:", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchCartCount();
-    fetchWishlistCount();
-  }, []);
   return (
     <div>
       <ContextProvider >
@@ -150,11 +108,11 @@ const App = () => {
           <Route path="/checkoutpage" element={<CheckoutPage />} />
           <Route path="/addressform" element={<AddressForm />} />
           <Route path="/bathbodyinfo/:id" element={<Bathbodyinfo />} />
-          <Route path="searchbar" element={<SearchBar />} />
-          <Route path="wishlist" element={<Wishlist />} />
-          <Route path="contactus" element={<ContactUs />} />
-          <Route path="bottomnav" element={<BottomNav />} />
-          <Route path="myorderspage" element={<MyOrdersPage />} />
+          <Route path="/searchbar" element={<SearchBar />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/bottomnav" element={<BottomNav />} />
+          <Route path="/myorderspage" element={<MyOrdersPage />} />
         </Routes>
       </Router>
       </ContextProvider>
