@@ -17,6 +17,10 @@ const Api = {
     url: `${backendApi}/signup/${userId}/role`,
     method: "put"
   }),
+  deleteUser: (userId) => ({
+    url: `${backendApi}/signup/delete/${userId}`,
+    method: "delete"
+  }),
   currentUser: {
     url: `${backendApi}/signup/getcurrentuser`,
     method: "get"
@@ -74,7 +78,7 @@ const Api = {
     url: `${backendApi}/api/order/getAllOrder`,
   },
   GetMyOrders: {
-    method : "GET",
+    method: "GET",
     url: `${backendApi}/api/order/myOrders`,
   },
   updateOrderStatus: (id) => ({
@@ -113,18 +117,30 @@ const Api = {
     url: `${backendApi}/api/contact/create`,
     method: 'POST'
   },
+  getAllContacts: {
+    url: `${backendApi}/api/contact/all`,
+    method: 'GET'
+  },
+  getUserContacts: (userId) => ({
+    url: `${backendApi}/api/contact/user/${userId}`,
+    method: 'GET'
+  }),
+  updateContactStatus: (id) => ({
+    url: `${backendApi}/api/contact/update/${id}`,
+    method: 'PUT'
+  }),
   CreateRazorpayOrder: {
     method: 'POST',
     url: `${backendApi}/payment/create-order`,
   },
-  getAllOrders:{
+  getAllOrders: {
     method: 'GET',
     url: `${backendApi}/api/order/getAllOrder`,
   },
   saveAddress: {
-  url: `${backendApi}/signup/save-address`,
-  method: "post"
-},
+    url: `${backendApi}/signup/save-address`,
+    method: "post"
+  },
 
 
 }

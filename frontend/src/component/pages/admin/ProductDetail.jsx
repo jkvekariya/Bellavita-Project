@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const { cartCount, setCartCount } = useContext(Context);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
 
   const fetchProducts = async () => {
     try {
@@ -28,7 +28,18 @@ const ProductDetail = () => {
     try {
       const res = await fetch(Api.DeleteProduct(id).url, {
         method: Api.DeleteProduct(id).method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+
+      if (res.status === 401) {
+        localStorage.removeItem("adminToken");
+        localStorage.removeItem("adminUser");
+        toast.error("Session expired. Please login again.");
+        window.location.href = "/login";
+        return;
+      }
 
       if (res.ok) {
         setProducts((prev) => prev.filter((product) => product._id !== id));
@@ -79,7 +90,7 @@ const ProductDetail = () => {
   return (
     <div>
       <div className="py-5 flex justify-between items-center">
-        <h1 className="text-xl text-gray-700 font-bold ml-10">All Products</h1>
+        <h1 className="text-3xl font-bold text-gray-800 ml-10">All Products</h1>
         <button
           className="px-5 py-2 bg-gray-100 font-semibold border border-gray-200 hover:bg-white mr-10"
           onClick={() => navigate("/AddProduct")}
@@ -121,11 +132,14 @@ const ProductDetail = () => {
               <tr key={product._id} className="text-gray-700">
                 <td className="px-6 py-3 border-t border-gray-200">{index + 1}.</td>
                 <td className="h-12 px-6 border-t border-l border-gray-200">
-                  <div className="flex justify-center">
+                  <div className="flex justify-center bg-gray-50 rounded-lg p-1">
                     <img
-                      className="w-20 h-20 object-cover"
-                      src={product.image}
+                      className="w-20 h-20 object-contain mix-blend-multiply"
+                      src={Array.isArray(product.image) ? product.image[0] : product.image}
                       alt={product.name}
+                      onError={(e) => {
+                        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%23e0e0e0' width='80' height='80'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='10' fill='%23999'%3ENo image%3C/text%3E%3C/svg%3E";
+                      }}
                     />
                   </div>
                 </td>

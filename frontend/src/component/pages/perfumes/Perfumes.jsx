@@ -28,11 +28,12 @@ const Perfumes = () => {
     try {
       const res = await fetch(Api.ProductgetAll.url);
       const data = await res.json();
-      const perfumeOnly = data.filter(
-        (p) => p.category === "Perfume" || p.category === "BestSeller"
+      // Filter products by category='Perfume'
+      const perfumeProducts = data.filter(product =>
+        product.category && product.category.toLowerCase() === 'perfume'
       );
-      setProducts(perfumeOnly);
-      setFilteredSortedProducts(perfumeOnly);
+      setProducts(perfumeProducts);
+      setFilteredSortedProducts(perfumeProducts);
     } catch (error) {
       console.error("Error fetching products", error);
     }
@@ -227,9 +228,12 @@ const Perfumes = () => {
                   </span>
 
                   <img
-                    src={product.image}
+                    src={Array.isArray(product.image) ? product.image[0] : product.image}
                     alt={product.name}
                     className="w-full object-cover transition-transform duration-300 group-hover:scale-105 h-40 sm:h-48 md:h-60"
+                    onError={(e) => {
+                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f0f0f0' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='14' fill='%23999'%3EImage not available%3C/text%3E%3C/svg%3E";
+                    }}
                   />
 
                   <span className="absolute bottom-2 left-2 bg-teal-500 text-white text-[10px] px-1 py-1 font-medium z-10">

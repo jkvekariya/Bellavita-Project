@@ -117,36 +117,33 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto">
-      <button
-        onClick={toggleMobileSearch}
-        className="md:hidden absolute left-2 top-1/2 transform -translate-y-1/2 text-black text-xl z-20"
-        aria-label={mobileSearchOpen ? "Close search" : "Open search"}
-      >
-        {mobileSearchOpen ? <FaTimes /> : <FaSearch />}
-      </button>
-      <input
-        type="text"
-        placeholder="Search products..."
-        className={`border-b border-black outline-none ml-10 placeholder-black text-sm 
-          w-full 
-          ${
-            mobileSearchOpen
-              ? "opacity-100 visible"
-              : "opacity-0 invisible pointer-events-none"
-          } 
-          md:opacity-100 md:visible md:pointer-events-auto md:ml-0 md:w-full`}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => {
-          if (query.length >= 2 && results.length > 0) {
-            setShowDropdown(true);
-          }
-        }}
-        onKeyDown={handleKeyDown}
-        ref={inputRef}
-        autoComplete="off"
-      />
+    <div className="relative w-full max-w-xl group">
+      <div className="relative flex items-center w-full bg-[#f8f8f8] border border-gray-200 rounded-full transition-all duration-300 focus-within:bg-white focus-within:border-black focus-within:shadow-md">
+        <FaSearch className="ml-5 text-gray-400 group-focus-within:text-black transition-colors" />
+        <input
+          type="text"
+          placeholder="SEARCH LUXURY PERFUMES..."
+          className="w-full bg-transparent px-4 py-2.5 outline-none text-xs md:text-sm tracking-widest font-['Jost'] text-black placeholder-gray-400"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onFocus={() => {
+            if (query.length >= 2 && results.length > 0) {
+              setShowDropdown(true);
+            }
+          }}
+          onKeyDown={handleKeyDown}
+          ref={inputRef}
+          autoComplete="off"
+        />
+        {query && (
+          <button
+            onClick={() => setQuery("")}
+            className="mr-4 text-gray-400 hover:text-black"
+          >
+            <FaTimes />
+          </button>
+        )}
+      </div>
 
       {showDropdown && results.length > 0 && (
         <div
@@ -156,9 +153,8 @@ const SearchBar = () => {
           {results.map((product, index) => (
             <div
               key={product._id}
-              className={`flex items-center p-2 cursor-pointer hover:bg-gray-100 ${
-                index === activeIndex ? "bg-gray-100" : ""
-              }`}
+              className={`flex items-center p-2 cursor-pointer hover:bg-gray-100 ${index === activeIndex ? "bg-gray-100" : ""
+                }`}
               onClick={() => {
                 navigate(`/productinfo/${product._id}`);
                 setQuery("");

@@ -26,8 +26,11 @@ export default function Bodywashes() {
         try {
             const res = await fetch(Api.ProductgetAll.url);
             const data = await res.json();
-            setProducts(data);
-            const bodywash = data.filter((p) => p.category === "BodyWash");
+            // Filter products by category containing 'Body Wash'
+            const bodywash = data.filter((p) =>
+                p.category && p.category.toLowerCase().includes('body') &&
+                p.category.toLowerCase().includes('wash')
+            );
             setProducts(bodywash);
             setFilteredSortedProducts(bodywash);
         } catch (error) {
@@ -225,7 +228,7 @@ export default function Bodywashes() {
                                     </span>
 
                                     <img
-                                        src={product.image}
+                                        src={Array.isArray(product.image) ? product.image[0] : product.image}
                                         alt={product.name}
                                         className="w-full object-cover transition-transform duration-300 group-hover:scale-105 h-40 sm:h-48 md:h-60"
                                     />

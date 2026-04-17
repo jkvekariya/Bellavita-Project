@@ -26,8 +26,11 @@ export default function Luxuryperfumes() {
         try {
             const res = await fetch(Api.ProductgetAll.url);
             const data = await res.json();
-            setProducts(data);
-            const luxury = data.filter((p) => p.category === "LuxuryPerfume");
+            // Filter products by collection='Luxury' AND category='Perfume'
+            const luxury = data.filter((p) =>
+                p.collection && p.collection.toLowerCase() === 'luxury' &&
+                p.category && p.category.toLowerCase() === 'perfume'
+            );
             setProducts(luxury);
             setFilteredSortedProducts(luxury);
         } catch (error) {
@@ -224,7 +227,7 @@ export default function Luxuryperfumes() {
                                     </span>
 
                                     <img
-                                        src={product.image}
+                                        src={Array.isArray(product.image) ? product.image[0] : product.image}
                                         alt={product.name}
                                         className="w-full object-cover transition-transform duration-300 group-hover:scale-105 h-40 sm:h-48 md:h-60"
                                     />

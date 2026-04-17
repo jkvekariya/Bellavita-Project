@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema({
   howtouse:[String ],
   allingredients:[String ],
   createdAt: { type: Date, default: Date.now },
-});
+}, { suppressReservedKeysWarning: true });
 
 export default mongoose.model('products', productSchema);
 

@@ -25,8 +25,11 @@ export default function Bodylotions() {
     try {
       const res = await fetch(Api.ProductgetAll.url);
       const data = await res.json();
-      setProducts(data);
-      const bodyLotions = data.filter((p) => p.category === "BodyLotion");
+      // Filter products by category containing 'Body Lotion'
+      const bodyLotions = data.filter((p) =>
+        p.category && p.category.toLowerCase().includes('body') &&
+        p.category.toLowerCase().includes('lotion')
+      );
       setProducts(bodyLotions);
       setFilteredSortedProducts(bodyLotions);
     } catch (error) {
@@ -159,7 +162,7 @@ export default function Bodylotions() {
       toast.success("Added to wishlist");
       fetchWishlistItems();
       setWishlistItems(data.items || []);
-       fetchWishlistCount();
+      fetchWishlistCount();
       setIsWishlistOpen(true);
     } catch (error) {
       console.error("Request failed:", error);
@@ -224,7 +227,7 @@ export default function Bodylotions() {
                   </span>
 
                   <img
-                    src={product.image}
+                    src={Array.isArray(product.image) ? product.image[0] : product.image}
                     alt={product.name}
                     className="w-full object-cover transition-transform duration-300 group-hover:scale-105 h-40 sm:h-48 md:h-60"
                   />

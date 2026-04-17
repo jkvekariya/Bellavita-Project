@@ -20,9 +20,14 @@ const orderSchema = new mongoose.Schema(
       pincode: { type: String, required: true },
     },
     totalAmount: { type: Number, required: true },
+    orderId: { type: String, unique: true, sparse: true }, // sparse allows nulls for existing docs if any
+    paymentMethod: { type: String, default: 'Online' },
+    paymentStatus: { type: String, default: 'Pending' },
+    transactionId: { type: String },
+    orderType: { type: String, default: 'Online' },
     status: {
       type: String,
-      enum: ['Pending', 'Confirmed', 'Shipped', 'Delivered', 'Cancelled'],
+      enum: ['Pending', 'Confirmed', 'Processing', 'Shipped', 'Out for Delivery', 'Delivered', 'Cancelled', 'Returned', 'Refunded'],
       default: 'Pending',
     },
   },

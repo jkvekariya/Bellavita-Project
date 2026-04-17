@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import UserModel from '../model/userModel/UserModel.js'; 
+import UserModel from '../model/userModel/UserModel.js';
 const adminMiddleware = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
@@ -13,7 +13,7 @@ const adminMiddleware = async (req, res, next) => {
     console.log('Decoded User:', decoded);
     console.log('Fetched User:', user);
 
-    if (!user || user.role !== 'ADMIN') {
+    if (!user || !user.role || user.role.toUpperCase() !== 'ADMIN') {
       return res.status(403).json({ error: 'Forbidden: Admin access required' });
     }
 

@@ -18,6 +18,10 @@ const controller = {
         return res.status(400).json({ error: 'Incomplete address information' });
       }
 
+      const orderId = '#ORD' + Math.floor(1000 + Math.random() * 9000); // Simple unique ID
+      const paymentStatus = paymentId ? 'Paid' : 'Pending';
+      const paymentMethod = paymentId ? 'Razorpay' : 'COD';
+
       const newOrder = new orderModel({
         userId,
         fullName,
@@ -26,7 +30,11 @@ const controller = {
         mobileNumber,
         address,
         totalAmount,
-        paymentId,
+        transactionId: paymentId,
+        orderId,
+        paymentStatus,
+        paymentMethod,
+        orderType: paymentId ? 'Online' : 'COD',
         status: 'Confirmed'
       });
 
@@ -54,7 +62,7 @@ const controller = {
         {
           path: 'items.productId',
           model: productModel,
-          select: 'name price image',
+          select: 'name realprice price discountprice image',
           options: { strictPopulate: false },
         }
       ]);
@@ -71,13 +79,13 @@ const controller = {
       const allOrders = await orderModel.find().sort({ createdAt: -1 }).populate([
         {
           path: 'userId',
-          model: UserModel, 
+          model: UserModel,
           select: 'name email',
         },
         {
           path: 'items.productId',
           model: productModel,
-          select: 'name price image',
+          select: 'name realprice price discountprice image',
           options: { strictPopulate: false }
         }
       ]);
@@ -97,7 +105,7 @@ const controller = {
         .populate({
           path: 'items.productId',
           model: productModel,
-          select: 'name price image',
+          select: 'name realprice price discountprice image',
           options: { strictPopulate: false }
         });
 

@@ -19,7 +19,7 @@ export default function RelatedProducts({
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-10">
                 {relatedProducts.map((product) => {
                     const isInWishlist = wishlistItems?.some(
-                        (item) => item.productId._id === product._id
+                        (item) => item?.productId?._id === product?._id
                     );
 
                     return (
@@ -45,10 +45,10 @@ export default function RelatedProducts({
 
                             <span
                                 className={`absolute top-2 left-2 text-white text-[10px] px-2 py-1 z-10 ${product.condition === "NEW"
-                                        ? "bg-[#e1796b]"
-                                        : product.condition === "BESTSELLER"
-                                            ? "bg-[#e5b17f]"
-                                            : ""
+                                    ? "bg-[#e1796b]"
+                                    : product.condition === "BESTSELLER"
+                                        ? "bg-[#e5b17f]"
+                                        : ""
                                     }`}
                             >
                                 {product.condition}

@@ -2,73 +2,92 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-neutral-700 text-neutral-300 py-15">
-      <div className="continer mx-auto px-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8  max-w-6xl">
-        
-        <div>
-          <h3 className="text-neutral-300 font-semibold mb-4">BESTSELLERS</h3>
-          <ul className="space-y-2">
-            <Link to="/allproduct" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-30 after:transition-transform after:duration-300 after:origin-left">Shop All</Link>
-            <Link to="/BestSellers" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-40 after:transition-transform after:duration-300 after:origin-left">Best Sellers</Link>
-            <Link to="/perfumes" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-32 after:transition-transform after:duration-300 after:origin-left">Perfumes</Link>
-            <Link to="/bathbody" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-32 after:transition-transform after:duration-300 after:origin-left">Bath & Body</Link>
-            <Link to="/newarrivals" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-45 after:transition-transform after:duration-300 after:origin-left">New Arrivals</Link>
-            <Link to="/gifting" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-23 after:transition-transform after:duration-300 after:origin-left">Gifting</Link>
-          </ul>
-        </div>
+    <footer className="bg-[#2a2a2a] text-white py-16 font-['Jost']">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
 
-        <div>
-        <h3 className="text-lg font-semibold text-neutral-300 mb-4">INFORMATION</h3>
-          <ul className="space-y-2">
-            <Link to="/Blogs" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-19 after:transition-transform after:duration-300 after:origin-left">Blogs</Link>
-            <Link to="/AboutUs" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-33 after:transition-transform after:duration-300 after:origin-left">About Us</Link>
-            <Link to="/contactus" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-39 after:transition-transform after:duration-300 after:origin-left">Contact Us</Link>
-          </ul>
-        </div>
-
-        <div>
-        <h3 className="text-lg font-semibold text-neutral-300 mb-4">SUPPORT</h3>
-          <ul className="space-y-2">
-            <Link to="/PrivacyPolicy" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-47 after:transition-transform after:duration-300 after:origin-left">Privacy Policy</Link>
-            <Link to="/ShippingPolicy" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-55 after:transition-transform after:duration-300 after:origin-left">Shipping Policy</Link>
-            <Link to="/RefundReturn" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-82   after:transition-transform after:duration-300 after:origin-left">Refund & Return Policy</Link>
-            <Link to="/TermsConditions" className="hover:text-white ursor-pointer after:block after:h-[1px] after:bg-white after:scale-x-0 hover:after:scale-x-70 after:transition-transform after:duration-300 after:origin-left">Terms & Conditions</Link>
-          </ul>
-        </div>
-
-        <div>
-        <h3 className="text-lg font-semibold text-neutral-300 mb-4">CONTACT US</h3>
-          <p className="text-sm">Office Location: Plot no. 417, Udyog Vihar Phase III, Gurgaon, Haryana, India</p>
-          <Link to='' className="mt-2 text-sm hover:text-white cursor-pointer">Contact Us on WhatsApp</Link>
-          <p className="mt-2 text-sm">+91-9311732440</p>
-          <p className="mt-2 text-sm">Timing: 10:00 AM to 7:00 PM, Monday to Sunday</p>
-        </div>
-
-        <div>
-          <h3 className="text-neutral-300 font-semibold mb-4">EXCLUSIVE</h3>
-          <div className="relative">
-            <input type="email" placeholder="Enter email here" className="w-full p-2  text-neutral-300 border-b  border-neutral-300 bofocus:outline-none"
-            />
-            <button className="absolute right-3 top-2 text-neutral-300 hover:text-white transition">
-              →
-            </button>
+          {/* Logo & About */}
+          <div className="lg:col-span-1">
+            <h2 className="text-xl font-bold tracking-widest mb-6">BELLAVITA<sup>®</sup></h2>
+            <p className="text-[#a0a0a0] text-sm leading-relaxed font-['Lato']">
+              Experience the world of luxury fragrances. We craft premium scents for those who appreciate the finer things in life.
+            </p>
           </div>
-          <p className="mt-2 text-sm">Sign up here to get the latest news, updates and special offers delivered to your inbox.</p>
-          <div className="flex space-x-4 mt-4">
-            <Link to="#" className="text-neutral-300 hover:text-white"><i className="fab fa-facebook"></i></Link>
-            <Link to="#" className="text-neutral-300 hover:text-white"><i className="fab fa-twitter"></i></Link>
-            <Link to="#" className="text-neutral-300 hover:text-white"><i className="fab fa-pinterest"></i></Link>
-            <Link to="#" className="text-neutral-300 hover:text-white"><i className="fab fa-instagram"></i></Link>
-            <Link to="#" className="text-neutral-300 hover:text-white"><i className="fab fa-youtube"></i></Link>
-          </div>
-        </div>
-      </div>
 
-      <div className="mt-10 text-center text-sm mx-auto text-neutral-300">
-        © 2025, Bella Vita Luxury.
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] mb-6 text-white border-b border-white/10 pb-2">Bestsellers</h3>
+            <ul className="flex flex-col space-y-3">
+              <li><Link to="/allproduct" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Shop All</Link></li>
+              <li><Link to="/BestSellers" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Best Sellers</Link></li>
+              <li><Link to="/perfumes" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Perfumes</Link></li>
+              <li><Link to="/bathbody" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Bath & Body</Link></li>
+              <li><Link to="/newarrivals" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">New Arrivals</Link></li>
+              <li><Link to="/gifting" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Gifting</Link></li>
+            </ul>
+          </div>
+
+          {/* Info & Support */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] mb-6 text-white border-b border-white/10 pb-2">Information</h3>
+            <ul className="flex flex-col space-y-3">
+              <li><Link to="/Blogs" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Blogs</Link></li>
+              <li><Link to="/AboutUs" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">About Us</Link></li>
+              <li><Link to="/contactus" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Contact Us</Link></li>
+              <li><Link to="/PrivacyPolicy" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Privacy Policy</Link></li>
+              <li><Link to="/ShippingPolicy" className="text-[#a0a0a0] hover:text-white text-sm transition-colors font-['Lato']">Shipping Policy</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Details */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] mb-6 text-white border-b border-white/10 pb-2">Contact Us</h3>
+            <div className="flex flex-col space-y-4 text-[#a0a0a0] text-sm font-['Lato']">
+              <p className="leading-relaxed">
+                B-45, Capital Square near Yogichowk, Varachha, Surat, Gujarat, India.
+              </p>
+              <div className="flex flex-col space-y-1">
+                <p className="flex items-center gap-2"><i className="fa-brands fa-whatsapp text-green-500"></i> +91-9945678720</p>
+                <p className="px-6 text-xs text-[#707070]">Mon-Sun: 10AM - 7PM</p>
+              </div>
+              <a href="mailto:info@bellavita.com" className="hover:text-white transition-colors">info@bellavita.com</a>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] mb-6 text-white border-b border-white/10 pb-2">Newsletter</h3>
+            <p className="text-[#a0a0a0] text-xs mb-4 font-['Lato']">Sign up for exclusive updates and offers.</p>
+            <div className="relative group">
+              <input
+                type="email"
+                placeholder="EMAIL ADDRESS"
+                className="w-full bg-transparent border-b border-[#404040] py-2 text-sm focus:border-white focus:outline-none transition-colors font-['Lato'] uppercase tracking-widest placeholder:text-[#505050]"
+              />
+              <button className="absolute right-0 bottom-2 text-white/50 hover:text-white transition-colors">
+                <i className="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div className="flex items-center gap-6 mt-8">
+              <a href="#" className="text-[#a0a0a0] hover:text-white transition-all transform hover:-translate-y-1"><i className="fa-brands fa-facebook-f"></i></a>
+              <a href="#" className="text-[#a0a0a0] hover:text-white transition-all transform hover:-translate-y-1"><i className="fa-brands fa-instagram text-lg"></i></a>
+              <a href="#" className="text-[#a0a0a0] hover:text-white transition-all transform hover:-translate-y-1"><i className="fa-brands fa-x-twitter"></i></a>
+              <a href="#" className="text-[#a0a0a0] hover:text-white transition-all transform hover:-translate-y-1"><i className="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-20 pt-8 border-t border-white/5 text-center">
+          <p className="text-[#606060] text-xs font-['Lato'] tracking-widest uppercase">
+            © 2025 BELLAVITA LUXURY. ALL RIGHTS RESERVED.
+          </p>
+        </div>
       </div>
     </footer>
   );
 }
 
-export default Footer
+export default Footer;
+

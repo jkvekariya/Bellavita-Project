@@ -4,12 +4,12 @@ export const createRazorpayOrder = async (req, res) => {
   try {
     const { amount, currency = "INR", receipt, mobileNumber, } = req.body;
 
-    if (!amount || !mobileNumber ) {
+    if (!amount || !mobileNumber) {
       return res.status(400).json({ error: "Required fields are missing" });
     }
 
     const options = {
-      amount: amount * 100, 
+      amount: Math.round(amount * 100), // Ensure integer amount
       currency,
       receipt: receipt || `receipt_order_${Date.now()}`,
     };
@@ -21,9 +21,10 @@ export const createRazorpayOrder = async (req, res) => {
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
+      key: process.env.RAZORPAY_KEY_ID,
     });
   } catch (error) {
     console.error("Error creating Razorpay order:", error);
-    res.status(500).json({ error: "Failed to create Razorpay order" });
+    res.status(500).json({ error: "Failed to create Razorpay order", details: error.message });
   }
 };

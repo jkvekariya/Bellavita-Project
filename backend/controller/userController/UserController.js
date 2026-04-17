@@ -162,6 +162,26 @@ const UserController = {
         }
     },
 
+    async deleteUser(req, res) {
+        try {
+            const { userId } = req.params;
+
+            if (req.user.id === userId) {
+                return res.status(400).json({ message: "Cannot delete your own account" });
+            }
+
+            const deletedUser = await UserModel.findByIdAndDelete(userId);
+            if (!deletedUser) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            res.json({ message: "User deleted successfully" });
+        } catch (error) {
+            console.error("Error in deleteUser:", error);
+            res.status(500).json({ message: "Error deleting user" });
+        }
+    },
+
 };
 
 export default UserController;

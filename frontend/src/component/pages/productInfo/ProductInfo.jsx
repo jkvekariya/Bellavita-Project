@@ -177,7 +177,7 @@ export default function ProductInfo() {
         }
 
         const isInWishlist = wishlistItems.some(
-            (item) => item.productId._id === product._id
+            (item) => item?.productId?._id === product?._id
         );
         if (isInWishlist) {
             toast("Already in the wishlist", { icon: "❤️" });
@@ -216,7 +216,7 @@ export default function ProductInfo() {
 
 
     if (!product) return <div className="text-center p-10">Loading...</div>;
-    const isInWishlist = wishlistItems.some(item => item.productId._id === product._id);
+    const isInWishlist = wishlistItems.some(item => item?.productId?._id === product?._id);
     return (
         <Layout>
             <div className="max-w-5xl mx-auto p-10 grid md:grid-cols-2 gap-8">

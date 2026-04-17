@@ -13,7 +13,7 @@ export default function BathbodyRelatedProducts({ products, handleAddToCart, wis
             <h2 className="text-3xl font-medium mb-4 text-center">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-10">
                 {products.map((product) => {
-                    const isInWishlist = wishlistItems?.some(item => item.productId._id === product._id);
+                    const isInWishlist = wishlistItems?.some(item => item?.productId?._id === product?._id);
                     return (
                         <div
                             key={product._id}
@@ -22,7 +22,7 @@ export default function BathbodyRelatedProducts({ products, handleAddToCart, wis
                         >
                             {product.condition && (
                                 <span className={`absolute top-2 left-2 text-white text-[10px] px-2 py-1 z-10 ${product.condition === "NEW" ? "bg-[#e1796b]" :
-                                        product.condition === "BESTSELLER" ? "bg-[#e5b17f]" : ""
+                                    product.condition === "BESTSELLER" ? "bg-[#e5b17f]" : ""
                                     }`}>
                                     {product.condition}
                                 </span>

@@ -16,19 +16,17 @@ import ImageCarousel from "../../imagecarousel/ImageCarousel";
 const Home = () => {
     return (
         <div>
-            <TopBannerCarousel/> 
-            <Navbar/>
-            <Carousel/>
-            <HomePageProductCard/>
-            <HeroSection/>
-            <Category/>
-            <Video/>
-            <WhyBellavita/>
-            <Offerbanner/>
-            <ImageCarousel/>
-            <ProductGallery/>
-            <BrandLogoCarousel/>
-            <Footer/>
+            <TopBannerCarousel />
+            <Navbar />
+            <Carousel />
+            <HomePageProductCard />
+            <Category />
+            <Video />
+            <WhyBellavita />
+            <Offerbanner />
+            <ProductGallery />
+            <BrandLogoCarousel />
+            <Footer />
         </div>
     );
 }

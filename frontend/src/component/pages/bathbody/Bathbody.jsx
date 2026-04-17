@@ -26,8 +26,14 @@ export default function Bathbody() {
     try {
       const res = await fetch(Api.ProductgetAll.url);
       const data = await res.json();
-      setProducts(data);
-      const bathBodyOnly = data.filter((p) => p.category === "BathBody");
+      // Filter products by collection or category containing 'Bath' or 'Body'
+      const bathBodyOnly = data.filter((p) =>
+        (p.collection && p.collection.toLowerCase().includes('bath')) ||
+        (p.collection && p.collection.toLowerCase().includes('body')) ||
+        (p.category && p.category.toLowerCase().includes('body')) ||
+        (p.category && p.category.toLowerCase().includes('wash')) ||
+        (p.category && p.category.toLowerCase().includes('lotion'))
+      );
       setProducts(bathBodyOnly);
       setFilteredSortedProducts(bathBodyOnly);
     } catch (error) {
@@ -225,7 +231,7 @@ export default function Bathbody() {
                   </span>
 
                   <img
-                    src={product.image}
+                    src={Array.isArray(product.image) ? product.image[0] : product.image}
                     alt={product.name}
                     className="w-full object-cover transition-transform duration-300 group-hover:scale-105
              h-40 sm:h-48 md:h-60"

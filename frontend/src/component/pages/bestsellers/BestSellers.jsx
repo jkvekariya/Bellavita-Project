@@ -28,11 +28,14 @@ const Perfumes = () => {
     try {
       const res = await fetch(Api.ProductgetAll.url);
       const data = await res.json();
-      const perfumeOnly = data.filter(
-        (p) => p.category === "Perfume" || p.category === "BestSeller"
-      );
-      setProducts(perfumeOnly);
-      setFilteredSortedProducts(perfumeOnly);
+      // Filter products by condition containing 'Best' and 'Seller' (handles "Best Seller" with space)
+      const bestsellerProducts = data.filter(product => {
+        if (!product.condition) return false;
+        const condition = product.condition.toLowerCase().replace(/\s+/g, '');
+        return condition.includes('best') && condition.includes('seller');
+      });
+      setProducts(bestsellerProducts);
+      setFilteredSortedProducts(bestsellerProducts);
     } catch (error) {
       console.error("Error fetching products", error);
     }
@@ -164,7 +167,7 @@ const Perfumes = () => {
       toast.success("Added to wishlist");
       fetchWishlistItems();
       setWishlistItems(data.items || []);
-     fetchWishlistCount();
+      fetchWishlistCount();
       setIsWishlistOpen(true);
     } catch (error) {
       console.error("Request failed:", error);
@@ -227,9 +230,12 @@ const Perfumes = () => {
                   </span>
 
                   <img
-                    src={product.image}
+                    src={Array.isArray(product.image) ? product.image[0] : product.image}
                     alt={product.name}
                     className="w-full object-cover transition-transform duration-300 group-hover:scale-105 h-40 sm:h-48 md:h-60"
+                    onError={(e) => {
+                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%23f0f0f0' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='14' fill='%23999'%3EImage not available%3C/text%3E%3C/svg%3E";
+                    }}
                   />
 
                   <span className="absolute bottom-2 left-2 bg-teal-500 text-white text-[10px] px-1 py-1 font-medium z-10">
@@ -244,10 +250,10 @@ const Perfumes = () => {
                   <p className="inline-block text-[9px] text-gray-500 uppercase tracking-widest">
                     {product.collection}
                   </p>
-                  <h3 className="font-semibold text-[12px] text-slate-800">
+                  <h3 className="font-semibold text-[12px] text-slate-800 line-clamp-1">
                     {product.name.substring(0, 25)}
                   </h3>
-                  <div className="flex items-center gap-1 text-sm mt-1">
+                  <div className="flex items-center gap-1 text-sm">
                     <FaStar className="text-yellow-500 text-xs" />
                     <span className="text-xs">{product.rating} |</span>
                     <BsPatchCheckFill className="text-blue-600 ml-1 text-xs" />
@@ -255,7 +261,7 @@ const Perfumes = () => {
                       ({product.reviews} Reviews)
                     </span>
                   </div>
-                  <div className="mt-1">
+                  <div className="mt-0.5">
                     <span className="font-semibold text-sm">
                       ₹{product.discountprice.toFixed(2)}
                     </span>

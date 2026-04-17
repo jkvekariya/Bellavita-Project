@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Api from '../../../Apis/backendApi';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
     const navigate = useNavigate();
@@ -19,12 +20,25 @@ const AddProduct = () => {
         howtouse: [],
         allingredients: [],
     });
+    const [imageErrors, setImageErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
 
         if (["image","benefits","howtouse","allingredients"].includes(name)) {
-            setFormData({ ...formData, [name]: value.split(",") });
+            const arrayValue = value.split(",").map(item => item.trim());
+            setFormData({ ...formData, [name]: arrayValue });
+            
+            // Validate image URLs if image field
+            if (name === "image") {
+                const errors = {};
+                arrayValue.forEach((url, idx) => {
+                    if (url && !url.match(/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+                        errors[idx] = "Invalid image URL format";
+                    }
+                });
+                setImageErrors(errors);
+            }
         }
         else if (name === 'benefits') {
             setFormData(prev => ({ ...prev, [name]: value.split(',').map(item => item.trim()) }));
@@ -48,11 +62,11 @@ const AddProduct = () => {
             console.log("API response:", result);
 
             if (!res.ok) {
-                console.error('Failed to add product:', result.error || res.statusText);
+                toast.error('Failed to add product: ' + (result.error || res.statusText));
                 return;
             }
 
-            alert('Product added successfully!');
+            toast.success('Product added successfully!');
             navigate("/Admindashboard");
             setFormData({
                 name: '',
@@ -120,8 +134,44 @@ const AddProduct = () => {
                 </div>
 
                 <div className="flex flex-col">
-                    <label className='mb-3'>Image URL</label>
-                    <input name="image" placeholder="Image URL" value={formData.image.join(",")} onChange={handleChange} className="border border-gray-500 rounded text-sm p-2"/>
+                    <label className='mb-3'>Image URL <span className="text-red-500">*</span></label>
+                    <p className="text-xs text-gray-600 mb-2">
+                        Enter image URLs separated by commas. Use: https://placehold.co/400 for testing, or Pexels/Unsplash/Pixabay for real images
+                    </p>
+                    <input 
+                        name="image" 
+                        placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg" 
+                        value={formData.image.join(", ")} 
+                        onChange={handleChange} 
+                        className="border border-gray-500 rounded text-sm p-2"
+                    />
+                    {Object.keys(imageErrors).length > 0 && (
+                        <p className="text-red-500 text-xs mt-1">⚠️ Some image URLs are invalid</p>
+                    )}
+                    
+                    {/* Image Preview */}
+                    {formData.image.length > 0 && (
+                        <div className="mt-3">
+                            <p className="text-sm font-semibold mb-2">Preview:</p>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                {formData.image.map((url, idx) => (
+                                    <div key={idx} className="relative">
+                                        <img 
+                                            src={url} 
+                                            alt={`Preview ${idx}`}
+                                            className="w-full h-24 object-cover rounded border border-gray-300"
+                                            onError={() => setImageErrors(prev => ({...prev, [idx]: "Failed to load"}))}
+                                        />
+                                        {imageErrors[idx] && (
+                                            <p className="absolute bottom-0 left-0 right-0 bg-red-500 text-white text-xs p-1 rounded">
+                                                {imageErrors[idx]}
+                                            </p>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="flex flex-col">

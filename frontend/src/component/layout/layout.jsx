@@ -1,15 +1,21 @@
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import TopBannerCarousel from "../topbannercarousel/TopBannerCarousel";
-const Layout = ({children}) => {
+import { useLocation } from "react-router-dom";
+
+const Layout = ({ children }) => {
+    const location = useLocation();
+    const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+    const isAdminPage = location.pathname.toLowerCase().startsWith("/admin");
+
     return (
         <div>
-            <TopBannerCarousel/>
-            <Navbar/>
-            <div className="main-content min-h-screen">
+            {!isAuthPage && !isAdminPage && <TopBannerCarousel />}
+            {!isAuthPage && !isAdminPage && <Navbar />}
+            <div className={`main-content ${!isAuthPage && !isAdminPage ? 'min-h-screen' : ''}`}>
                 {children}
             </div>
-            <Footer/>
+            {!isAuthPage && !isAdminPage && <Footer />}
         </div>
     );
 }

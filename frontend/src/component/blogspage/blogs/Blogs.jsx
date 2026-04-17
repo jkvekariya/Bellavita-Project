@@ -8,11 +8,11 @@ const Blogs = () => {
 
     return (
         <Layout>
-            <div className="mx-auto max-w-3xl px-4 py-10">
-                <h1 className="text-4xl font-midum mb-8">Perfumes</h1>
+            <div className="mx-auto max-w-3xl px-4 py-10 font-['Lato']">
+                <h1 className="text-4xl font-midum mb-8 font-['Jost']">Perfumes</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="cursor-pointer overflow-hidden  transition " onClick={() => navigate("/BlogFragrance")}>
-                        <img src="https://bellavitaluxury.co.in/cdn/shop/articles/Perfume_or_Body_mist_dc5e2118-b5f2-449d-a569-1e0c07d958ee.jpg?v=1727259658&width=1100" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
+                        <img src="/perfume.png" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
                         <div className="mt-2">
                             <h2 className="text-xl font-midum">Your Ideal Fragrance: Perfumes or Body Mists?</h2>
                             <p className="text-gray-500 text-xs mt-2">September 25, 2024</p>
@@ -24,7 +24,7 @@ const Blogs = () => {
                     </div>
 
                     <div className="cursor-pointer  overflow-hidden transition" onClick={() => navigate("/TaajGold")}>
-                        <img src="https://bellavitaluxury.co.in/cdn/shop/articles/20th_May_Blog_Banner.jpg?v=1724927093&width=535" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
+                        <img src="/whiteoud.png" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
                         <div className="mt-2">
                             <h2 className="text-xl font-midum">TAAJ Gold Oud & AMEER Attar</h2>
                             <p className="text-gray-500 text-xs mt-2">August 29, 2024</p>
@@ -36,7 +36,7 @@ const Blogs = () => {
                     </div>
 
                     <div className="cursor-pointer  overflow-hidden transition mt-5" onClick={() => navigate("/AttarLifestyle")}>
-                        <img src="https://bellavitaluxury.co.in/cdn/shop/articles/Attar_as_a_Lifestyle.jpg?v=1719899681&width=535" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
+                        <img src="/honeyoud.png" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
                         <div className="mt-2">
                             <h2 className="text-xl font-midum">Attar as a Lifestyle</h2>
                             <p className="text-gray-500 text-xs mt-2">July 02, 2024</p>
@@ -48,7 +48,7 @@ const Blogs = () => {
                     </div>
 
                     <div className="cursor-pointer  overflow-hidden transition mt-5" onClick={() => navigate("/ValentinesDay")}>
-                        <img src="https://bellavitaluxury.co.in/cdn/shop/articles/Valentine_s_Day_Gifts.jpg?v=1709788939&width=535" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
+                        <img src="/datewomen.png" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
                         <div className="mt-2">
                             <h2 className="text-xl font-midum">Valentine’s Day Gifts: Perfume Gift Set & Hampers</h2>
                             <p className="text-gray-500 text-xs mt-2">March 07, 2024</p>
@@ -60,7 +60,7 @@ const Blogs = () => {
                     </div>
 
                     <div className="cursor-pointer  overflow-hidden transition mt-5" onClick={() => navigate("/GiftingPerfume")}>
-                        <img src="https://bellavitaluxury.co.in/cdn/shop/articles/Gifting_the_Perfect_Perfume_Set_for_Couples.jpg?v=1687158097&width=535" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
+                        <img src="/convertio.in_luxurygitftset.png" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
                         <div className="mt-2">
                             <h2 className="text-xl font-midum">Gifting the Perfect Perfume Set for Couples: An Expert Guide</h2>
                             <p className="text-gray-500 text-xs mt-2">June 19, 2023</p>
@@ -72,7 +72,7 @@ const Blogs = () => {
                     </div>
 
                     <div className="cursor-pointer  overflow-hidden transition mt-5" onClick={() => navigate("/WomenPerfume")}>
-                        <img src="https://bellavitaluxury.co.in/cdn/shop/articles/Women-Perfume-History-Uses-with-these-6-Best-Fragrances.jpg?v=1652174637&width=535" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
+                        <img src="/datewomen.png" className="w-full h-48 object-cover transition-transform transfrom hover:scale-103" />
                         <div className="mt-2">
                             <h2 className="text-xl font-midum">Women Perfume - History, Uses with these 6 Best Fragrances</h2>
                             <p className="text-gray-500 text-xs mt-2">March 24, 2022</p>

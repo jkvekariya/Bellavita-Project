@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+dotenv.config();
 import mongoose from "mongoose";
 import express from "express";
 import cors from "cors"
@@ -12,8 +13,15 @@ import RazorpayRoutes from "./router/orderRouter/RazorpayRoutes.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-dotenv.config();
+app.use(cors({
+  origin: true,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+
+console.log("MongoDB URL:", process.env.URL);
 
 mongoose.connect(process.env.URL)
   .then(() => {
@@ -30,7 +38,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/wishlist", wishlistRouter);
 app.use("/api/contact", contactRouter);
-app.use("/payment",RazorpayRoutes)
+app.use("/payment", RazorpayRoutes)
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Endpoint not found' });

@@ -14,31 +14,34 @@ export default function BrandLogoCarousel() {
   ];
 
   return (
-    <section id="brand-logos" className="py-10 bg-white scroll-smooth">
-      <div>
-        <Swiper
-          speed={3000}
-          slidesPerView={4}
-          spaceBetween={10}
-          loop={true}
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          modules={[Autoplay]}
-          className="w-full"
-        >
-          {logos.map((logo) => (
-            <SwiperSlide key={logo.id} className="flex justify-center items-center">
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                className="h-16 w-auto object-contain transition-transform duration-300"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+    <section id="brand-logos" className="py-16 bg-white scroll-smooth">
+      <div className="container mx-auto">
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-19 tracking-widest uppercase">WHO HAVE COLLABORATES ?</h2>
+        <div>
+          <Swiper
+            speed={3000}
+            slidesPerView={4}
+            spaceBetween={10}
+            loop={true}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            modules={[Autoplay]}
+            className="w-full"
+          >
+            {logos.map((logo) => (
+              <SwiperSlide key={logo.id} className="flex justify-center items-center">
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-16 w-auto object-contain transition-transform duration-300"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );

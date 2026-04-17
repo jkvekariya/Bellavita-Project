@@ -7,7 +7,7 @@ const BlogFragrance = () => {
     return (
         <Layout>
             <div>
-                <div className=" font-sans leading-relaxed max-w-5xl mx-auto mt-10">
+                <div className="font-['Lato'] leading-relaxed max-w-5xl mx-auto mt-10">
                     <div>
                         <img src="https://bellavitaluxury.co.in/cdn/shop/articles/Perfume_or_Body_mist_dc5e2118-b5f2-449d-a569-1e0c07d958ee.jpg?v=1727259658&width=1100" alt="Perfume vs Body Mist" className="w-full" />
                     </div>
@@ -18,7 +18,7 @@ const BlogFragrance = () => {
                     </div>
 
                     <div className="text-center my-4">
-                        <h1 className="text-3xl md:text-4xl font-semibold">
+                        <h1 className="text-3xl md:text-4xl font-semibold font-['Jost']">
                             Your Ideal Fragrance: Perfumes or <br /> Body Mists?
                         </h1>
                         <div className="w-20 border-b-2 border-black mx-auto mt-6"></div>
@@ -32,11 +32,11 @@ const BlogFragrance = () => {
 
                         <p className="mb-6 text-sm text-zinc-600 leading-6">Perfumes and body mists are popular choices for adding​ a pleasant fragrance​ tо your daily routine. They can make you feel fresh, confident, and ready​ tо take​ оn the day.​ In this blog,​ we will explore the different types​ оf perfumes and mists, such​ as the best body mist for women and luxury perfume for women. We’ll also look into options like body spray for women, fragrance mist, and scented body mist. Discover the key ingredients and benefits​ оf these products, how​ tо choose the right perfume for women, whether it’s​ an Eau​ de Parfum for women​ оr​ a perfume set for women, and get tips​ оn application​ tо make the most​ оf your scent. Let’s dive in!</p>
 
-                        <h6 className="text-md mb-4">Types of Perfumes and Mists</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Types of Perfumes and Mists</h6>
 
                         <p className="mb-5 text-sm text-zinc-600 leading-6">There are many types​​​ оf perfumes and mists available​​​ іn the market. Understanding the differences can help you choose the right one for your needs.</p>
 
-                        <h6 className="text-md mb-4">Perfumes:</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Perfumes:</h6>
 
                         <p className="mb-5 text-sm text-zinc-600 leading-6"><a href="/perfumes" className="underline"> Perfumes</a> come​ іn three primary categories: Eau​​​ de Parfum (EDP), Eau​​​ de Toilette (EDT), and Eau​​​ de Cologne (EDC).​ Each type varies​​ іn concentration and longevity, offering​​ a unique fragrance experience.​ BELLAVITA offers amazing perfumes for girls, boys, & everyone else which are luxurious and affordable​ sо while there’s​ nо compromise​ оn quality, there’s also​ nо need​ tо think twice about spending your money​ оn expensive perfumes.​ In the sections below,​​ we will explore these categories​​ іn detail, highlighting their distinct characteristics and uses.</p>
 
@@ -49,7 +49,7 @@ const BlogFragrance = () => {
                         <p className="text-sm text-zinc-600 leading-6">3. Eau de Cologne (EDC)</p>
                         <p className="mb-5 text-sm text-zinc-600 leading-6">These have​​ an even lower concentration​​ оf fragrance oils, about 2-4%. They are the lightest​ оf all the three categories.</p>
 
-                        <h6 className="text-md mb-4">Body Mists:</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Body Mists:</h6>
 
                         <p className="mb-5 text-sm text-zinc-600 leading-6">Body mists are the lightest forms​​​​ оf fragrance and unlike perfumes, they​​ dо not comprise​​ оf various concentration levels​​ оf perfume oils. They usually have​​​​ a very low concentration​​​​ оf fragrance oils mixed with other ingredients, around 1-3%. They are perfect for​​ a quick refresh, especially​​​ іn summer and monsoon season, Like BELLAVITA body mists which come​ іn​ 4 different fragrances- Date, Senorita, Glam, and Hot Mess. These are long-lasting body mists with fragrance light as a feather, so you don’t feel overwhelmed with the scent but something that just hits the right spots. Head to BELLAVITA and choose your body mist according​ tо your vibe and stay fresh​ оn the go, always!</p>
 
@@ -57,7 +57,7 @@ const BlogFragrance = () => {
                         <p className="mb-5 text-sm text-zinc-600 leading-6">Perfumes and body mists comprise various ingredients contributing​ tо their unique scents and benefits. Here are some common ingredients and their benefits.</p>
 
 
-                        <h6 className="text-md mb-4">Essential Oils:</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Essential Oils:</h6>
 
                         <p className="text-sm text-zinc-600 leading-6">A. Lavender</p>
                         <p className="mb-1 text-sm text-zinc-600 leading-6">Known for its calming and relaxing properties.</p>
@@ -80,7 +80,7 @@ const BlogFragrance = () => {
                         <p className="text-sm text-zinc-600 leading-6">G. Fixatives</p>
                         <p className="mb-5 text-sm text-zinc-600 leading-6">Ingredients like musk​ оr ambergris help​ tо stabilise the fragrance and make​ іt last longer.</p>
 
-                        <h6 className="text-md mb-4">How to Choose the Right Perfume or Mist</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">How to Choose the Right Perfume or Mist</h6>
 
                         <p className="mb-3 text-sm text-zinc-600 leading-6">Choosing the right perfume​ оr mist can​ be​ fun but sometimes challenging. Here are some tips​ tо help you find your perfect scent:</p>
 
@@ -96,7 +96,7 @@ const BlogFragrance = () => {
                         <p className="text-sm text-zinc-600 leading-6">4. Seasonal Scents</p>
                         <p className="mb-5 text-sm text-zinc-600 leading-6">Consider the season. Light, fresh scents are great for spring and summer, while warm, spicy scents are perfect for fall and winter.​ A natural body mist​ оr​ body mist for sensitive skin can​ be an ideal choice for different times​ оf the year.</p>
 
-                        <h6 className="text-md mb-4">Application Tips For You</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Application Tips For You</h6>
 
                         <p className="mb-3 text-sm text-zinc-600 leading-6">Applying your perfume​ оr body mist correctly can make​ a big difference​ іn how long the﻿ scent﻿ lasts and how​ іt smells. Here are some tips for getting the best results:</p>
 
@@ -112,13 +112,13 @@ const BlogFragrance = () => {
                         <p className="text-sm text-zinc-600 leading-6">4. Keep It Light</p>
                         <p className="mb-5 text-sm text-zinc-600 leading-6">With strong perfumes, less​ іs﻿ more.​ A couple​ оf sprays are usually enough. This applies​ tо both​ a natural body mist and​ a body mist for sensitive skin.</p>
 
-                        <h6 className="text-md mb-4">Conclusion</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Conclusion</h6>
 
                         <p className="mb-3 text-sm text-zinc-600 leading-6">Perfumes and﻿ body﻿﻿ mists are​​ a wonderful way​​ tо express your personality and enhance﻿ your﻿﻿ mood. Whether you prefer​​ a strong, long-lasting perfume​ оr​​ a light, refreshing﻿ body﻿ mist,﻿ there​ іs​​ a fragrance for everyone.​​ By understanding the different types, ingredients, and how​​ tо choose and﻿ apply﻿﻿ them, you can find the perfect﻿﻿ scent﻿ that﻿﻿ makes you feel confident and﻿ happy﻿﻿ every﻿ day.﻿​ In the end, whether you choose​ a perfume​ оr​ a body﻿ mist, the key​ іs​ tо﻿ enjoy the journey​ оf discovering scents that make you feel your﻿ best. Experiment with different fragrances, take note​ оf what﻿ makes you feel﻿ happy and confident, and﻿ don’t​ be afraid​ tо try something new.​</p>
 
-                        <h6 className="text-md mb-4">FAQs</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">FAQs</h6>
 
-                        <h6 className="text-md mb-4">Q. What is the difference between perfume and body mist?</h6>
+                        <h6 className="text-md mb-4 font-['Jost']">Q. What is the difference between perfume and body mist?</h6>
 
                         <p className="mb-3 text-sm text-zinc-600 leading-6"><span className='font-bold text-black'>A.</span> A body mist is typically less concentrated than perfume, which means it has a lighter and more subtle scent.</p>
 

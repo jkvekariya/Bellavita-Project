@@ -67,139 +67,134 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`w-full shadow-sm bg-white z-20 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"
-          } sticky top-0`}
+        className={`w-full shadow-md bg-white z-20 transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"
+          } sticky top-0 px-6 md:px-12 lg:px-24`}
       >
-        <div className="container mx-auto lg:px-50 relative">
-          <div className="flex items-center justify-between py-4">
-            <div className="md:hidden">
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="text-2xl text-black"
-              >
-                {menuOpen ? <FaTimes /> : <FaBars />}
-              </button>
-            </div>
-            {!isAdmin && (
-              <div className="lg:flex items-center space-x-2 max-w-xs flex-1 justify-center">
-                <SearchBar />
-              </div>
-            )}
-            <div className="flex-1 text-center lg:flex-none">
-              <Link to="/" className="text-xl font-bold tracking-wide">
-                BELLAVITA<sup>®</sup>
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between py-5 gap-8">
+            {/* Left: Logo */}
+            <div className="flex-shrink-0">
+              <Link to="/" className="text-xl md:text-2xl font-bold tracking-[0.2em] font-['Jost']">
+                BELLAVITA
               </Link>
             </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <div className="relative">
-                <button
-                  onClick={() => setIsCartOpen(true)}
-                  className={`${user && !isAdmin ? "" : "invisible"} relative`}
-                  title="Open Cart"
-                >
-                  <i className="fa-solid fa-cart-shopping text-2xl px-4 mt-1"></i>
-                  {cartCount > 0 && (
-                    <span className="absolute -top-2 right-2 bg-black text-white text-xs rounded-full px-1">
-                      {cartCount}
-                    </span>
-                  )}
-                </button>
-              </div>
-              <div className="relative">
-                <button
-                  onClick={() => setIsWishlistOpen(true)}
-                  className={`${user && !isAdmin ? "" : "invisible"} relative`}
-                  title="Open Wishlist"
-                >
-                  <FaHeart className="text-2xl mt-1" />
-                  {wishlistCount > 0 && (
-                    <span className="absolute -top-1.5 -right-1 bg-black text-white text-xs rounded-full px-1">
-                      {wishlistCount}
-                    </span>
-                  )}
-                </button>
-              </div>
-              <Link
-                to="/myorderspage"
-                className={`${user && !isAdmin ? "" : "invisible"} text-sm hover:underline px-2`}
-              >
-                <i className="fa-solid fa-box text-2xl"></i>
-              </Link>
+
+            {/* Middle: Premium Search box */}
+            <div className="hidden lg:flex flex-1 justify-center max-w-2xl mx-auto">
+              <SearchBar />
+            </div>
+
+            {/* Right: Icons and Logo */}
+            <div className="flex items-center space-x-4 md:space-x-8">
               {user ? (
-                <button
-                  onClick={logoutUser}
-                  className="bg-black text-white px-4 py-1 rounded-full text-sm hover:bg-gray-800 transition-colors duration-200"
-                >
-                  Logout
-                </button>
+                <>
+                  {/* Profile Icon */}
+                  <Link
+                    to="/myorderspage"
+                    className="transition-transform hover:scale-110"
+                    title="My Profile"
+                  >
+                    <i className="fa-solid fa-user text-xl md:text-1xl"></i>
+                  </Link>
+
+                  {/* Wishlist Icon */}
+                  <button
+                    onClick={() => setIsWishlistOpen(true)}
+                    className="relative transition-transform hover:scale-110"
+                    title="Wishlist"
+                  >
+                    <FaHeart className="text-xl md:text-1xl" />
+                    {wishlistCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                        {wishlistCount}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Cart Icon */}
+                  <button
+                    onClick={() => setIsCartOpen(true)}
+                    className="relative transition-transform hover:scale-110"
+                    title="Cart"
+                  >
+                    <i className="fa-solid fa-cart-shopping text-xl md:text-1xl"></i>
+                    {cartCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                        {cartCount}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Logout Button */}
+                  <button
+                    onClick={logoutUser}
+                    className="border border-black text-black px-4 md:px-5 py-2 rounded-full text-[10px] md:text-xs hover:bg-black hover:text-white transition-all font-['Jost'] uppercase tracking-widest"
+                  >
+                    Logout
+                  </button>
+                </>
               ) : (
-                <Link to="/signup">
-                  <i className="fa-solid fa-user text-2xl px-4"></i>
+                <Link to="/signup" className="transition-transform hover:scale-110 flex items-center gap-2">
+                  <i className="fa-solid fa-user text-xl md:text-2xl"></i>
                 </Link>
               )}
-              {isAdmin && (
-                <Link
-                  to="/AdminDashboard"
-                  className="bg-black text-white px-4 py-1 rounded-full text-sm hover:bg-gray-800 transition-colors duration-200 flex items-center gap-2"
-                >
-                  <i className="fa-solid fa-user-shield"></i>
-                  Admin
+
+              {/* Right Logo identifier as requested */}
+              <div className="hidden xl:block border-l border-gray-200 pl-4 md:pl-8">
+                <Link to="/" className="text-xs font-bold tracking-widest font-['Jost'] uppercase opacity-60 hover:opacity-100 transition-opacity">
+                  LUXURY
                 </Link>
-              )}
+              </div>
             </div>
           </div>
-          {!isAdmin && (
-            <nav className="hidden md:flex justify-center space-x-8 text-xs font-medium py-2">
-              <Link to="/allproduct" className={navLinkClass("/allproduct")}>Shop All</Link>
-              <Link to="/BestSellers" className={navLinkClass("/BestSellers")}>BESTSELLERS</Link>
-              <Link to="/perfumes" className={navLinkClass("/perfumes")}>PERFUMES</Link>
-              <Link to="/bathbody" className={navLinkClass("/bathbody")}>Bath & Body</Link>
-              <Link to="/newarrivals" className={navLinkClass("/newarrivals")}>NEW ARRIVALS</Link>
-              <Link to="/gifting" className={navLinkClass("/gifting")}>GIFTING</Link>
-            </nav>
-          )}
+          <nav className="hidden md:flex justify-center space-x-8 text-xs font-medium py-2">
+            <Link to="/" className={navLinkClass("/")}>HOME</Link>
+            <Link to="/allproduct" className={navLinkClass("/allproduct")}>Shop All</Link>
+
+            <Link to="/BestSellers" className={navLinkClass("/BestSellers")}>BESTSELLERS</Link>
+            <Link to="/perfumes" className={navLinkClass("/perfumes")}>PERFUMES</Link>
+            <Link to="/bathbody" className={navLinkClass("/bathbody")}>Bath & Body</Link>
+            <Link to="/newarrivals" className={navLinkClass("/newarrivals")}>NEW ARRIVALS</Link>
+            <Link to="/gifting" className={navLinkClass("/gifting")}>GIFTING</Link>
+          </nav>
           {menuOpen && (
             <div className="md:hidden bg-white shadow-md border-t" role="menu">
               <ul className="flex flex-col items-center space-y-4 p-6 text-sm font-medium">
-                {!isAdmin && (
+                <>
+                  <Link to="/" className={navLinkClass("/")} onClick={() => setMenuOpen(false)}>HOME</Link>
+                  <Link to="/allproduct" className={navLinkClass("/allproduct")} onClick={() => setMenuOpen(false)}>Shop All</Link>
+                  <Link to="/BestSellers" className={navLinkClass("/BestSellers")} onClick={() => setMenuOpen(false)}>BESTSELLERS</Link>
+                  <Link to="/perfumes" className={navLinkClass("/perfumes")} onClick={() => setMenuOpen(false)}>PERFUMES</Link>
+                  <Link to="/bathbody" className={navLinkClass("/bathbody")} onClick={() => setMenuOpen(false)}>Bath & Body</Link>
+                  <Link to="/newarrivals" className={navLinkClass("/newarrivals")} onClick={() => setMenuOpen(false)}>NEW ARRIVALS</Link>
+                  <Link to="/gifting" className={navLinkClass("/gifting")} onClick={() => setMenuOpen(false)}>GIFTING</Link>
+                </>
+
+                {user && (
                   <>
-                    <Link to="/allproduct" className={navLinkClass("/allproduct")}>Shop All</Link>
-                    <Link to="/BestSellers" className={navLinkClass("/BestSellers")}>BESTSELLERS</Link>
-                    <Link to="/perfumes" className={navLinkClass("/perfumes")}>PERFUMES</Link>
-                    <Link to="/bathbody" className={navLinkClass("/bathbody")}>Bath & Body</Link>
-                    <Link to="/newarrivals" className={navLinkClass("/newarrivals")}>NEW ARRIVALS</Link>
-                    <Link to="/gifting" className={navLinkClass("/gifting")}>GIFTING</Link>
+                    <Link to="/myorderspage" className="text-gray-700 hover:underline" onClick={() => setMenuOpen(false)}>My Orders</Link>
+                    <Link to="/myqueries" className="text-gray-700 hover:underline" onClick={() => setMenuOpen(false)}>My Inquiries</Link>
                   </>
                 )}
 
-                {user && !isAdmin && (
-                  <Link to="/myorders" className="text-gray-700 hover:underline">My Orders</Link>
-                )}
-
-                {isAdmin && (
-                  <Link to="/AdminDashboard" className="text-gray-700 hover:underline">Admin Dashboard</Link>
-                )}
-
                 {user ? (
-                  <button onClick={logoutUser} className="text-black font-semibold">Logout</button>
+                  <button onClick={() => { logoutUser(); setMenuOpen(false); }} className="text-black font-semibold">Logout</button>
                 ) : (
-                  <Link to="/signup">Sign Up / Login</Link>
+                  <Link to="/signup" onClick={() => setMenuOpen(false)}>Sign Up / Login</Link>
                 )}
               </ul>
             </div>
           )}
         </div>
       </header>
-      {!isAdmin && (
-        <BottomNav
-          onOpenCart={() => setIsCartOpen(true)}
-          onOpenWishlist={() => setIsWishlistOpen(true)}
-          cartCount={cartCount}
-          wishlistCount={wishlistCount}
-          user={user}
-          onLogout={logoutUser}
-        />
-      )}
+      <BottomNav
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        cartCount={cartCount}
+        wishlistCount={wishlistCount}
+        user={user}
+        onLogout={logoutUser}
+      />
       <CartPage isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <Wishlist isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} />
     </>

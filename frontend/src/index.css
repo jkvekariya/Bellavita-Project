@@ -1,7 +1,14 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+:root {
+  --font-jost: "Jost", sans-serif;
+  --font-lato: "Lato", sans-serif;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

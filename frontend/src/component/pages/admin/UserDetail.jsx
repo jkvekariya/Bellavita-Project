@@ -15,7 +15,7 @@ const UserDetail = () => {
 
     const fetchUsers = async () => {
         try {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
             if (!token) {
                 toast.error("Please login first");
                 return;
@@ -29,7 +29,12 @@ const UserDetail = () => {
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users:", error);
-            if (error.response?.status === 403) {
+            if (error.response?.status === 401) {
+                localStorage.removeItem("adminToken");
+                localStorage.removeItem("adminUser");
+                toast.error("Session expired. Please login again.");
+                window.location.href = "/login";
+            } else if (error.response?.status === 403) {
                 toast.error("Admin access required");
             } else {
                 toast.error("Failed to fetch users");
@@ -51,7 +56,7 @@ const UserDetail = () => {
 
     const handleRoleChange = async (userId) => {
         try {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
             await axios.put(
                 Api.updateUserRole(userId).url,
                 { role: newRole },
@@ -64,10 +69,27 @@ const UserDetail = () => {
 
             toast.success("Role updated successfully");
             setEditingUserId(null);
-            fetchUsers(); 
+            fetchUsers();
         } catch (error) {
             console.error("Error updating role:", error);
             toast.error(error.response?.data?.message || "Failed to update role");
+        }
+    };
+
+    const handleDeleteUser = async (userId) => {
+        if (!window.confirm("Are you sure you want to delete this user?")) return;
+        try {
+            const token = localStorage.getItem("adminToken") || localStorage.getItem("token");
+            await axios.delete(Api.deleteUser(userId).url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            toast.success("User deleted successfully");
+            fetchUsers();
+        } catch (error) {
+            console.error("Error deleting user:", error);
+            toast.error(error.response?.data?.message || "Failed to delete user");
         }
     };
 
@@ -76,9 +98,9 @@ const UserDetail = () => {
     }
 
     return (
-        <div>
-            <div className="py-5 flex justify-between items-center">
-                <h1 className="text-xl text-pink-300 font-bold">All Users</h1>
+        <div className="p-6 md:p-8 m-4 lg:m-8 bg-white rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.05)]">
+            <div className="py-4 mb-6 border-b border-pink-100 flex justify-between items-center">
+                <h1 className="text-3xl font-bold text-gray-800">All Users</h1>
             </div>
 
             <div className="w-full overflow-x-auto">
@@ -126,40 +148,45 @@ const UserDetail = () => {
                                         </select>
                                     ) : (
                                         <span className={`px-2 py-1 rounded-full text-xs ${user.role === "ADMIN"
-                                                ? "bg-purple-100 text-purple-800"
-                                                : "bg-blue-100 text-blue-800"
+                                            ? "bg-purple-100 text-purple-800"
+                                            : "bg-blue-100 text-blue-800"
                                             }`}>
                                             {user.role}
                                         </span>
                                     )}
                                 </td>
                                 <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500">
-                                    {editingUserId === user._id ? (
-                                        <>
+                                    <div className="flex items-center gap-4">
+                                        {editingUserId === user._id ? (
+                                            <>
+                                                <button
+                                                    onClick={() => handleRoleChange(user._id)}
+                                                    className="text-green-500 hover:text-green-600 font-medium cursor-pointer transition-colors"
+                                                >
+                                                    Save
+                                                </button>
+                                                <button
+                                                    onClick={cancelEditing}
+                                                    className="text-gray-500 hover:text-gray-700 font-medium cursor-pointer transition-colors"
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </>
+                                        ) : (
                                             <button
-                                                onClick={() => handleRoleChange(user._id)}
-                                                className="text-green-500 mr-3 cursor-pointer"
+                                                onClick={() => startEditing(user._id, user.role)}
+                                                className="text-blue-500 hover:text-blue-600 font-medium cursor-pointer transition-colors"
                                             >
-                                                Save
+                                                Edit Role
                                             </button>
-                                            <button
-                                                onClick={cancelEditing}
-                                                className="text-gray-500 cursor-pointer"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </>
-                                    ) : (
-                                        <button
-                                            onClick={() => startEditing(user._id, user.role)}
-                                            className="text-green-500 mr-3 cursor-pointer"
+                                        )}
+                                        <button 
+                                            onClick={() => handleDeleteUser(user._id)}
+                                            className="text-red-500 hover:text-red-600 font-medium cursor-pointer transition-colors"
                                         >
-                                            Edit Role
+                                            Delete
                                         </button>
-                                    )}
-                                    <button className="text-red-500 cursor-pointer">
-                                        Delete
-                                    </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

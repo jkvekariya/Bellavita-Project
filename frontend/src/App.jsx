@@ -1,4 +1,4 @@
-import  { BrowserRouter as Router,Route,Routes,} from "react-router-dom"; 
+import { BrowserRouter as Router, Route, Routes, } from "react-router-dom";
 import Home from './component/pages/home/Home';
 import Nopage from './component/pages/noPage/NoPage';
 import ProductInfo from './component/pages/productInfo/ProductInfo';
@@ -33,88 +33,90 @@ import Gifting from './component/pages/gifting/Gifting';
 import Bodywashes from './component/category/Bodywashes';
 import Bodylotions from './component/category/Bodylotions';
 import Bodydeos from './component/category/Bodydeos';
-import CheckoutPage from './component/pages/cart/CheckoutPage ';
+import CheckoutPage from './component/pages/cart/CheckoutPage';
 import AddressForm from './component/pages/cart/AddressForm';
 import SearchBar from './component/searchbar/SearchBar';
 import Wishlist from './component/wishlist/Wishlist';
 import ContactUs from './component/pages/contactus/ContactUs';
 import BottomNav from './component/bottomnav/BottomNav';
 import MyOrdersPage from './component/myorderspage/MyOrdersPage';
+import MyQueriesPage from './component/pages/myqueries/MyQueriesPage';
 import { ContextProvider } from "./component/context/Context";
 
 
 const App = () => {
-  
+
   return (
     <div>
       <ContextProvider >
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            fontSize: "14px",
-            padding: "12px 16px",
-            borderRadius: "8px",
-          },
-          success: {
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 4000,
             style: {
-              background: "#d1fae5",
-              color: "#065f46",
+              fontSize: "14px",
+              padding: "12px 16px",
+              borderRadius: "8px",
             },
-          },
-          error: {
-            style: {
-              background: "#fee2e2",
-              color: "#991b1b",
+            success: {
+              style: {
+                background: "#d1fae5",
+                color: "#065f46",
+              },
             },
-          },
-        }}
-      />
-      <Router>
-        <ScrollTop/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/*" element={<Nopage/>}/>
-          <Route path='/productinfo/:id' element={<ProductInfo/>}/>
-          <Route path="/allproduct" element={<AllProduct />} />
-          <Route path="/bestSellers" element={<BestSellers />}/>
-          <Route path="/Perfumes" element={<Perfumes />}/>
-          <Route path="/bathbody" element={<Bathbody />}/>
-          <Route path="/newarrivals" element={<Newarrivals/>}/>
-          <Route path="/gifting" element={<Gifting/>}/>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path='/AdminDashboard' element={<AdminDashboard/>}></Route>
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-          <Route path="/shippingpolicy" element={<ShippingPolicy />} />
-          <Route path="/refundreturn" element={<RefundReturn />} />
-          <Route path="/termsconditions" element={<TermsConditions />} />
-          <Route path="/blogfragrance" element={<BlogFragrance />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/TaajGold" element={<TaajGold />} />
-          <Route path="/attarlifestyle" element={<AttarLifestyle />} />
-          <Route path="/valentinesday" element={<ValentinesDay />} />
-          <Route path="/GiftingPerfume" element={<GiftingPerfume />} />
-          <Route path="/womenperfume" element={<WomenPerfume />} />
-          <Route path="/AddProduct" element={<AddProduct />} />
-          <Route path="/updateProduct/:id" element={<UpdateProduct />} />
-          <Route path="/luxuryperfumes" element={<Luxuryperfumes />} />
-          <Route path="/bodywashes" element={<Bodywashes />} />
-          <Route path="/bodylotions" element={<Bodylotions />} />
-          <Route path="/bodydeos" element={<Bodydeos />} />
-          <Route path="/checkoutpage" element={<CheckoutPage />} />
-          <Route path="/addressform" element={<AddressForm />} />
-          <Route path="/bathbodyinfo/:id" element={<Bathbodyinfo />} />
-          <Route path="/searchbar" element={<SearchBar />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/bottomnav" element={<BottomNav />} />
-          <Route path="/myorderspage" element={<MyOrdersPage />} />
-        </Routes>
-      </Router>
+            error: {
+              style: {
+                background: "#fee2e2",
+                color: "#991b1b",
+              },
+            },
+          }}
+        />
+        <Router>
+          <ScrollTop />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/*" element={<Nopage />} />
+            <Route path='/productinfo/:id' element={<ProductInfo />} />
+            <Route path="/allproduct" element={<AllProduct />} />
+            <Route path="/bestSellers" element={<BestSellers />} />
+            <Route path="/Perfumes" element={<Perfumes />} />
+            <Route path="/bathbody" element={<Bathbody />} />
+            <Route path="/newarrivals" element={<Newarrivals />} />
+            <Route path="/gifting" element={<Gifting />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path='/AdminDashboard' element={<AdminDashboard />}></Route>
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/shippingpolicy" element={<ShippingPolicy />} />
+            <Route path="/refundreturn" element={<RefundReturn />} />
+            <Route path="/termsconditions" element={<TermsConditions />} />
+            <Route path="/blogfragrance" element={<BlogFragrance />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/TaajGold" element={<TaajGold />} />
+            <Route path="/attarlifestyle" element={<AttarLifestyle />} />
+            <Route path="/valentinesday" element={<ValentinesDay />} />
+            <Route path="/GiftingPerfume" element={<GiftingPerfume />} />
+            <Route path="/womenperfume" element={<WomenPerfume />} />
+            <Route path="/AddProduct" element={<AddProduct />} />
+            <Route path="/updateProduct/:id" element={<UpdateProduct />} />
+            <Route path="/luxuryperfumes" element={<Luxuryperfumes />} />
+            <Route path="/bodywashes" element={<Bodywashes />} />
+            <Route path="/bodylotions" element={<Bodylotions />} />
+            <Route path="/bodydeos" element={<Bodydeos />} />
+            <Route path="/checkoutpage" element={<CheckoutPage />} />
+            <Route path="/addressform" element={<AddressForm />} />
+            <Route path="/bathbodyinfo/:id" element={<Bathbodyinfo />} />
+            <Route path="/searchbar" element={<SearchBar />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/bottomnav" element={<BottomNav />} />
+            <Route path="/myorderspage" element={<MyOrdersPage />} />
+            <Route path="/myqueries" element={<MyQueriesPage />} />
+          </Routes>
+        </Router>
       </ContextProvider>
     </div>
   )

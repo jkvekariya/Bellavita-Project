@@ -11,6 +11,7 @@ router.get("/allUser", getUser,adminMiddleware, UserController.getAllUsers);
 router.put("/:userId/role", getUser,adminMiddleware, UserController.updateUserRole);
 router.get("/getcurrentuser",getUser,UserController.getCurrentUser)
 router.post("/save-address", getUser, UserController.saveAddress);
+router.delete("/delete/:userId", getUser, adminMiddleware, UserController.deleteUser);
 
 
 export default router;
