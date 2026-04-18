@@ -17,7 +17,7 @@ console.log("🔥 SERVER FILE IS RUNNING hello");
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: true,
+  origin: "bellavita-gray.vercel.app",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
