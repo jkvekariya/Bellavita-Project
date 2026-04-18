@@ -11,6 +11,9 @@ import wishlistRouter from "./router/wishlistRouter/WishlistRouter.js";
 import contactRouter from "./router/contactRouter/ContactRouter.js";
 import RazorpayRoutes from "./router/orderRouter/RazorpayRoutes.js";
 
+
+console.log("🔥 SERVER FILE IS RUNNING");
+
 const app = express();
 app.use(express.json());
 app.use(cors({
