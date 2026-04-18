@@ -12,7 +12,7 @@ import contactRouter from "./router/contactRouter/ContactRouter.js";
 import RazorpayRoutes from "./router/orderRouter/RazorpayRoutes.js";
 
 
-console.log("🔥 SERVER FILE IS RUNNING");
+console.log("🔥 SERVER FILE IS RUNNING hello");
 
 const app = express();
 app.use(express.json());
