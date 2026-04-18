@@ -26,9 +26,8 @@ app.use(cors({
 
 console.log("MongoDB URL:", process.env.URL);
 
-MONGO_URL = ("mongodb+srv://vekariyajay985_db_user:<db_password>@cluster0.lbv2sao.mongodb.net/?appName=Cluster0")
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.URL)
   .then(() => {
     console.log("MongoDB connected...");
     app.listen(4000, () => {
