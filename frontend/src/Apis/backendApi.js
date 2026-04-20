@@ -1,4 +1,4 @@
-const backendApi = "https://bellavita-Backend.onrender.com" //http://localhost:4000
+const backendApi = "https://bellavita-project-1.onrender.com" //http://localhost:4000
 
 const Api = {
   signup: {
