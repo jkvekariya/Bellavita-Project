@@ -16,7 +16,7 @@ export default function BrandLogoCarousel() {
   return (
     <section id="brand-logos" className="py-16 bg-white scroll-smooth">
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-19 tracking-widest uppercase">WHO HAVE COLLABORATES ?</h2>
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-12 tracking-widest uppercase">WHO HAVE COLLABORATES ?</h2>
         <div>
           <Swiper
             speed={3000}

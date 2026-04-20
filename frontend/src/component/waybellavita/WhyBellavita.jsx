@@ -23,11 +23,11 @@ function WhyBellavita() {
   ];
 
   return (
-    <section className="py-26 bg-white text-center">
-      <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-19">
+    <section className="py-20 md:py-24 bg-white text-center">
+      <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-8">
         WHY BELLAVITA?
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 px-6  max-w-7xl mx-auto md:px-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 px-6 max-w-7xl mx-auto md:px-20">
         {features.map((feature, index) => (
           <div key={index} className="flex flex-col items-center">
             <div className="w-16 h-16 flex items-center justify-center mb-4 transition-transform duration-300 hover:-translate-y-2">
