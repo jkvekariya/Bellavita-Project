@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: [
-    "https://bellavita-gzsqrtza3-jkvekariyas-projects.vercel.app",
+    "https://bellavita-55va7mdx8-jkvekariyas-projects.vercel.app",
      "http://localhost:5173"
   ],
   credentials: true,
