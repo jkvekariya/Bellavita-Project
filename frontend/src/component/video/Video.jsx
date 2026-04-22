@@ -5,7 +5,15 @@ function Video() {
   const navigate = useNavigate();
   return (
     <div className="relative w-full h-[620px] sm:h-[520px] flex items-center justify-center overflow-hidden mt-16">
-      <video autoPlay loop muted className="absolute top-0 left-0 w-full h-full object-cover">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        className="absolute top-0 left-0 w-full h-full object-cover"
+      >
         <source
           src="https://cdn.shopify.com/videos/c/o/v/478dfd30e1114a6a9fe7a4c4d1b1ffa4.mp4"
           type="video/mp4"
