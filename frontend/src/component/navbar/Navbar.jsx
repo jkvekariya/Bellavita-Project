@@ -128,7 +128,7 @@ export default function Navbar() {
                   {/* Logout Button */}
                   <button
                     onClick={logoutUser}
-                    className="border border-black text-black px-4 md:px-5 py-2 rounded-full text-[10px] md:text-xs hover:bg-black hover:text-white transition-all font-['Jost'] uppercase tracking-widest"
+                    className="hidden md:inline-flex border border-black text-black px-4 md:px-5 py-2 rounded-full text-[10px] md:text-xs hover:bg-black hover:text-white transition-all font-['Jost'] uppercase tracking-widest"
                   >
                     Logout
                   </button>

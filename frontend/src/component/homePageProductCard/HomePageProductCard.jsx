@@ -13,7 +13,7 @@ export default function HomePageProductCard() {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
 
-  const { fetchWishlistCount, fetchCartCount, setIsCartOpen, setIsWishlistOpen, wishlistCount } = useContext(Context);
+  const { fetchWishlistCount, fetchCartCount, setIsWishlistOpen, wishlistCount } = useContext(Context);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -84,7 +84,6 @@ export default function HomePageProductCard() {
         if (response.ok) {
           toast.success("Added to cart");
           await fetchCartCount();
-          setIsCartOpen(true);
         }
       }
     } catch (error) {

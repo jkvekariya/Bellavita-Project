@@ -17,7 +17,6 @@ const Perfumes = () => {
   const {
     fetchCartCount,
     fetchWishlistCount,
-    setIsCartOpen,
     setIsWishlistOpen,
     wishlistCount,
 
@@ -113,7 +112,6 @@ const Perfumes = () => {
         if (response.ok) {
           toast.success("Added to cart");
           await fetchCartCount();
-          setIsCartOpen(true);
         } else {
           toast.error(data.error || "Failed to add to cart");
         }

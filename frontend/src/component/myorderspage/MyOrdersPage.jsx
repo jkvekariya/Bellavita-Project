@@ -8,7 +8,184 @@ import { toast } from "react-hot-toast";
 export default function MyOrdersPage() {
   const { user } = useContext(Context);
   const [orders, setOrders] = useState([]);
+  const [selectedInvoiceOrder, setSelectedInvoiceOrder] = useState(null);
   const navigate = useNavigate();
+
+  const formatCurrency = (value) => `₹${Number(value || 0).toFixed(2)}`;
+
+  const formatDate = (value) =>
+    new Date(value).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
+  const getInvoiceItems = (order) =>
+    (order?.items || []).map((item) => {
+      const product = item?.productId || {};
+      const unitPrice = Number(
+        product?.discountprice ?? product?.realprice ?? product?.price ?? 0
+      );
+      const quantity = Number(item?.quantity || 0);
+      return {
+        name: product?.name || "Product",
+        quantity,
+        unitPrice,
+        total: unitPrice * quantity,
+      };
+    });
+
+  const buildInvoiceHtml = (order) => {
+    const items = getInvoiceItems(order);
+    const itemsRows = items
+      .map(
+        (item, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>${formatCurrency(item.unitPrice)}</td>
+            <td>${formatCurrency(item.total)}</td>
+          </tr>
+        `
+      )
+      .join("");
+
+    return `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8" />
+          <title>Invoice ${order?._id || ""}</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 0; background: #f7f7f7; color: #111827; }
+            .page { max-width: 920px; margin: 24px auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 18px; overflow: hidden; }
+            .hero { padding: 32px; background: linear-gradient(135deg, #111827 0%, #1f2937 100%); color: white; }
+            .hero h1 { margin: 0 0 8px; font-size: 28px; }
+            .hero p { margin: 0; color: #d1d5db; font-size: 14px; }
+            .section { padding: 28px 32px; }
+            .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+            .card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px; }
+            .label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #6b7280; margin-bottom: 8px; }
+            .value { font-size: 15px; font-weight: 600; color: #111827; }
+            table { width: 100%; border-collapse: collapse; overflow: hidden; border: 1px solid #e5e7eb; border-radius: 14px; }
+            thead { background: #f3f4f6; }
+            th, td { padding: 14px 12px; text-align: left; font-size: 14px; border-bottom: 1px solid #e5e7eb; }
+            th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #4b5563; }
+            .total { margin-top: 24px; display: flex; justify-content: flex-end; }
+            .total-box { min-width: 280px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 14px; padding: 18px; }
+            .total-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: #374151; }
+            .grand { padding-top: 12px; border-top: 1px solid #d1d5db; font-size: 18px; font-weight: 700; color: #111827; }
+            .footer { padding: 0 32px 32px; font-size: 13px; color: #6b7280; }
+            @media print {
+              body { background: #fff; }
+              .page { margin: 0; max-width: none; border: none; border-radius: 0; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="page">
+            <div class="hero">
+              <h1>Bellavita Invoice</h1>
+              <p>Thank you for shopping with us.</p>
+            </div>
+            <div class="section">
+              <div class="grid">
+                <div class="card">
+                  <div class="label">Invoice / Order ID</div>
+                  <div class="value">${order?._id || "-"}</div>
+                </div>
+                <div class="card">
+                  <div class="label">Order Date</div>
+                  <div class="value">${formatDate(order?.createdAt)}</div>
+                </div>
+                <div class="card">
+                  <div class="label">Customer</div>
+                  <div class="value">${order?.fullName || "-"}</div>
+                </div>
+                <div class="card">
+                  <div class="label">Status</div>
+                  <div class="value" style="text-transform: capitalize;">${order?.status || "-"}</div>
+                </div>
+              </div>
+
+              <div class="card" style="margin-bottom: 24px;">
+                <div class="label">Delivery Address</div>
+                <div class="value" style="font-size: 14px; line-height: 1.7; font-weight: 500;">
+                  ${order?.address?.line1 || ""}<br/>
+                  ${order?.address?.line2 ? `${order.address.line2}<br/>` : ""}
+                  ${order?.address?.city || ""}, ${order?.address?.state || ""} - ${order?.address?.pincode || ""}<br/>
+                  Mobile: ${order?.mobileNumber || "-"}
+                </div>
+              </div>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${itemsRows}
+                </tbody>
+              </table>
+
+              <div class="total">
+                <div class="total-box">
+                  <div class="total-row">
+                    <span>Items</span>
+                    <span>${order?.items?.length || 0}</span>
+                  </div>
+                  <div class="total-row grand">
+                    <span>Grand Total</span>
+                    <span>${formatCurrency(order?.totalAmount)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              This is a system-generated invoice for your Bellavita order.
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+  };
+
+  const openInvoice = (order) => {
+    setSelectedInvoiceOrder(order);
+  };
+
+  const downloadInvoice = (order) => {
+    const html = buildInvoiceHtml(order);
+    const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `bellavita-invoice-${order?._id?.slice(-8) || "order"}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    toast.success("Invoice downloaded");
+  };
+
+  const printInvoice = (order) => {
+    const invoiceWindow = window.open("", "_blank", "width=1000,height=800");
+    if (!invoiceWindow) {
+      toast.error("Please allow popups to view invoice");
+      return;
+    }
+
+    invoiceWindow.document.open();
+    invoiceWindow.document.write(buildInvoiceHtml(order));
+    invoiceWindow.document.close();
+    invoiceWindow.focus();
+  };
 
   const fetchOrders = async (showToast = false) => {
     try {
@@ -57,14 +234,25 @@ export default function MyOrdersPage() {
                 Track and manage your orders
               </p>
             </div>
-            <button
-              onClick={() => fetchOrders(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group"
-              title="Refresh Orders"
-            >
-              <i className="fa-solid fa-rotate-right text-gray-500 group-hover:text-black transition-colors group-hover:rotate-180 duration-500"></i>
-              <span className="text-sm font-medium text-gray-700 group-hover:text-black">Refresh Status</span>
-            </button>
+            <div className="flex flex-col gap-3 w-fit">
+              <button
+                onClick={() => fetchOrders(true)}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-xl shadow-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 group"
+                title="Refresh Orders"
+              >
+                <i className="fa-solid fa-rotate-right text-gray-500 group-hover:text-black transition-colors group-hover:rotate-180 duration-500"></i>
+                <span className="text-sm font-medium text-gray-700 group-hover:text-black">Refresh Status</span>
+              </button>
+              <button
+                onClick={() => openInvoice(orders[0])}
+                disabled={!orders.length}
+                className="inline-flex items-center justify-center gap-2 self-start px-4 py-2.5 rounded-xl bg-gray-900 text-white shadow-sm hover:bg-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                title="View Invoice"
+              >
+                <i className="fa-solid fa-file-invoice"></i>
+                <span className="text-sm font-medium">Invoice</span>
+              </button>
+            </div>
           </div>
 
           {orders.length === 0 ? (
@@ -118,36 +306,59 @@ export default function MyOrdersPage() {
                         </span>
                       </div>
 
+                      <div className="flex justify-end mb-4">
+                        <button
+                          onClick={() => openInvoice(order)}
+                          className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-xs font-semibold text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors"
+                        >
+                          <i className="fa-solid fa-file-invoice"></i>
+                          View Invoice
+                        </button>
+                      </div>
+
                       <div className="space-y-4">
                         {order.items.map((item, idx) => {
                           const product = item.productId;
+                          const primaryImage = Array.isArray(product?.image) ? product.image[0] : product?.image;
+                          const unitPrice = Number(product?.discountprice ?? product?.realprice ?? product?.price ?? 0);
+                          const lineTotal = unitPrice * Number(item.quantity || 0);
+                          const itemSize =
+                            item?.size ||
+                            item?.selectedSize ||
+                            item?.variant?.size ||
+                            product?.size ||
+                            "";
                           return (
                             <div
                               key={idx}
-                              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors border border-gray-200"
+                              className="flex items-start gap-3 p-3 bg-white rounded-xl transition-colors border border-gray-200/70 hover:border-gray-300"
                             >
-                              <div className="w-full sm:w-28 h-28 flex-shrink-0 bg-white rounded-lg overflow-hidden border border-gray-200">
+                              <div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 bg-gray-50 rounded-lg overflow-hidden border border-gray-200/70">
                                 <img
-                                  src={product?.image || "/placeholder.jpg"}
+                                  src={primaryImage || "/placeholder.jpg"}
                                   alt={product?.name}
                                   className="w-full h-full object-contain p-2"
                                 />
                               </div>
                               <div className="flex-1 w-full">
-                                <p className="font-semibold text-lg text-gray-900 mb-2 font-['Jost']">
+                                <p className="font-semibold text-[13px] md:text-lg lg:text-xl text-gray-900 leading-snug font-['Jost']">
                                   {product?.name}
                                 </p>
-                                <div className="flex items-center gap-4 text-sm text-gray-600">
+                                {itemSize && (
+                                  <p className="text-[11px] md:text-sm lg:text-base text-gray-500 mt-1">
+                                    Size: <span className="font-medium text-gray-700">{itemSize}</span>
+                                  </p>
+                                )}
+                                <div className="mt-1.5 text-[11px] md:text-sm lg:text-base text-gray-600 space-y-1.5">
                                   <div className="flex items-center gap-2">
-                                    <i className="fa-solid fa-box-open text-gray-500"></i>
-                                    <span>Qty: <strong className="text-gray-900">{item.quantity}</strong></span>
+                                    <i className="fa-solid fa-box-open text-gray-400 text-[11px] md:text-sm lg:text-base"></i>
+                                    <span>
+                                      Qty: <strong className="text-gray-900">{item.quantity}</strong>
+                                    </span>
                                   </div>
-                                  {product?.price && (
-                                    <div className="flex items-center gap-2">
-                                      <i className="fa-solid fa-indian-rupee-sign text-gray-500"></i>
-                                      <span>₹{product.price} each</span>
-                                    </div>
-                                  )}
+                                  <p className="font-semibold text-gray-900 text-[13px] md:text-lg lg:text-xl">
+                                    ₹{lineTotal.toFixed(2)}
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -224,6 +435,116 @@ export default function MyOrdersPage() {
           )}
         </div>
       </div>
+      {selectedInvoiceOrder && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center px-4 py-6">
+          <div className="w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-[28px] bg-white shadow-2xl border border-white/60">
+            <div className="border-b border-gray-200 bg-gradient-to-r from-gray-900 to-gray-800 px-5 py-4 md:px-8 md:py-5 text-white flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.25em] text-gray-300">Invoice Preview</p>
+                <h2 className="text-xl md:text-2xl font-semibold font-['Jost']">
+                  Order #{selectedInvoiceOrder._id?.slice(-8)}
+                </h2>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <button
+                  onClick={() => printInvoice(selectedInvoiceOrder)}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
+                >
+                  <i className="fa-solid fa-eye"></i>
+                  Show Invoice
+                </button>
+                <button
+                  onClick={() => downloadInvoice(selectedInvoiceOrder)}
+                  className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-600 transition-colors"
+                >
+                  <i className="fa-solid fa-download"></i>
+                  Download
+                </button>
+                <button
+                  onClick={() => setSelectedInvoiceOrder(null)}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-medium text-white hover:bg-white/10 transition-colors"
+                >
+                  <i className="fa-solid fa-xmark"></i>
+                  Close
+                </button>
+              </div>
+            </div>
+
+            <div className="max-h-[calc(90vh-96px)] overflow-y-auto bg-[#f6f7fb] p-4 md:p-8">
+              <div className="mx-auto max-w-4xl rounded-[28px] border border-gray-200 bg-white shadow-[0_18px_60px_rgba(15,23,42,0.08)] overflow-hidden">
+                <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 px-6 py-8 md:px-10 text-white">
+                  <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.3em] text-gray-300">Bellavita</p>
+                      <h3 className="mt-2 text-3xl font-semibold font-['Jost']">Invoice</h3>
+                      <p className="mt-2 text-sm text-gray-300">A clean summary of your order details.</p>
+                    </div>
+                    <div className="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-gray-300">Invoice ID</p>
+                      <p className="mt-1 font-mono text-sm md:text-base">{selectedInvoiceOrder._id}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 md:p-10 space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500">Customer</p>
+                      <p className="mt-2 text-lg font-semibold text-gray-900">{selectedInvoiceOrder.fullName}</p>
+                      <p className="mt-1 text-sm text-gray-600">{selectedInvoiceOrder.mobileNumber}</p>
+                    </div>
+                    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500">Order Details</p>
+                      <div className="mt-2 space-y-1 text-sm text-gray-700">
+                        <p>Date: <span className="font-medium text-gray-900">{formatDate(selectedInvoiceOrder.createdAt)}</span></p>
+                        <p>Status: <span className="font-medium capitalize text-gray-900">{selectedInvoiceOrder.status}</span></p>
+                        <p>Items: <span className="font-medium text-gray-900">{selectedInvoiceOrder.items.length}</span></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden">
+                    <div className="border-b border-gray-200 bg-gray-50 px-5 py-4">
+                      <h4 className="text-lg font-semibold text-gray-900 font-['Jost']">Items Billed</h4>
+                    </div>
+                    <div className="divide-y divide-gray-200">
+                      {getInvoiceItems(selectedInvoiceOrder).map((item, index) => (
+                        <div key={`${item.name}-${index}`} className="grid grid-cols-[1fr_auto] gap-4 px-5 py-4">
+                          <div>
+                            <p className="text-sm font-semibold text-gray-900">{item.name}</p>
+                            <p className="mt-1 text-xs text-gray-500">
+                              Qty: {item.quantity} x {formatCurrency(item.unitPrice)}
+                            </p>
+                          </div>
+                          <p className="text-sm font-semibold text-gray-900 self-center">{formatCurrency(item.total)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500">Delivery Address</p>
+                      <div className="mt-3 text-sm leading-7 text-gray-700">
+                        <p>{selectedInvoiceOrder.address?.line1}</p>
+                        {selectedInvoiceOrder.address?.line2 && <p>{selectedInvoiceOrder.address.line2}</p>}
+                        <p>
+                          {selectedInvoiceOrder.address?.city}, {selectedInvoiceOrder.address?.state} - {selectedInvoiceOrder.address?.pincode}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="rounded-2xl border border-gray-200 bg-slate-950 p-5 text-white">
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-400">Total Amount</p>
+                      <p className="mt-3 text-3xl font-semibold">{formatCurrency(selectedInvoiceOrder.totalAmount)}</p>
+                      <p className="mt-2 text-sm text-gray-400">This invoice is generated from your order details.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

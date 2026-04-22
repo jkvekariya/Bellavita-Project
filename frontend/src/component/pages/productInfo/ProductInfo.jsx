@@ -22,7 +22,6 @@ export default function ProductInfo() {
     const [cartItems, setCartItems] = useState([]);
     const [wishlistItems, setWishlistItems] = useState([]);
     const {
-        setIsCartOpen,
         setIsWishlistOpen,
         wishlistCount,
     } = useContext(Context);
@@ -158,7 +157,6 @@ export default function ProductInfo() {
                 if (response.ok) {
                     toast.success("Added to cart");
                     await fetchCartCount();
-                    setIsCartOpen(true);
                 } else {
                     toast.error(data.error || "Failed to add to cart");
                 }
