@@ -60,12 +60,12 @@ const ProductGallery = () => {
           {productgallery.map((item, index) => (
             <div
               key={index}
-              className="gallery-item flex-shrink-0 min-w-full sm:min-w-[calc(50%-8px)] lg:min-w-[calc(25%-12px)] snap-start overflow-hidden rounded-md group"
+              className="gallery-item flex-shrink-0 min-w-[calc(50%-8px)] sm:min-w-[calc(50%-8px)] lg:min-w-[calc(25%-12px)] snap-start overflow-hidden rounded-md group"
             >
               <img
                 src={Array.isArray(item.image) ? item.image[0] : item.image}
                 alt={`Gallery image ${index + 1}`}
-                className="w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-auto h-auto md:h-72 lg:h-96 object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full h-48 sm:h-56 md:h-72 lg:h-96 object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           ))}
