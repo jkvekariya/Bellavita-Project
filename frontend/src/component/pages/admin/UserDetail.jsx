@@ -98,45 +98,45 @@ const UserDetail = () => {
     }
 
     return (
-        <div className="p-6 md:p-8 m-4 lg:m-8 bg-white rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.05)]">
-            <div className="py-4 mb-6 border-b border-pink-100 flex justify-between items-center">
-                <h1 className="text-3xl font-bold text-gray-800">All Users</h1>
+        <div className="p-4 md:p-8 m-2 md:m-4 lg:m-8 bg-white rounded-xl shadow-md">
+            <div className="py-3 md:py-4 mb-4 md:mb-6 border-b border-pink-100 flex justify-between items-center">
+                <h1 className="text-xl md:text-3xl font-bold text-gray-800">All Users</h1>
             </div>
 
-            <div className="w-full overflow-x-auto">
-                <table className="w-full text-left border border-collapse sm:border-separate border-pink-100 text-pink-400">
-                    <thead>
+            <div className="w-full overflow-x-auto shadow-sm rounded-lg">
+                <table className="w-full text-left border-collapse border-slate-200 text-slate-500 min-w-max">
+                    <thead className="bg-slate-100 text-slate-700">
                         <tr>
-                            <th className="h-12 px-6 text-md border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100 font-bold">
+                            <th className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base font-bold border-b border-slate-200">
                                 S.No.
                             </th>
-                            <th className="h-12 px-6 text-md font-bold border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100">
+                            <th className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base font-bold border-b border-slate-200">
                                 Name
                             </th>
-                            <th className="h-12 px-6 text-md font-bold border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100">
+                            <th className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base font-bold border-b border-slate-200">
                                 Email
                             </th>
-                            <th className="h-12 px-6 text-md font-bold border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100">
+                            <th className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base font-bold border-b border-slate-200">
                                 Role
                             </th>
-                            <th className="h-12 px-6 text-md font-bold border-l first:border-l-0 border-pink-100 text-slate-700 bg-slate-100">
+                            <th className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base font-bold border-b border-slate-200">
                                 Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         {users.map((user, index) => (
-                            <tr key={user._id} className="text-pink-300">
-                                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500">
+                            <tr key={user._id} className="hover:bg-slate-50 transition-colors border-b border-slate-100 last:border-b-0">
+                                <td className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base">
                                     {index + 1}
                                 </td>
-                                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500 first-letter:uppercase">
+                                <td className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base capitalize">
                                     {user.name}
                                 </td>
-                                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500">
+                                <td className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base">
                                     {user.email}
                                 </td>
-                                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500">
+                                <td className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base">
                                     {editingUserId === user._id ? (
                                         <select
                                             value={newRole}
@@ -147,7 +147,7 @@ const UserDetail = () => {
                                             <option value="ADMIN">ADMIN</option>
                                         </select>
                                     ) : (
-                                        <span className={`px-2 py-1 rounded-full text-xs ${user.role === "ADMIN"
+                                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${user.role === "ADMIN"
                                             ? "bg-purple-100 text-purple-800"
                                             : "bg-blue-100 text-blue-800"
                                             }`}>
@@ -155,13 +155,13 @@ const UserDetail = () => {
                                         </span>
                                     )}
                                 </td>
-                                <td className="h-12 px-6 text-md transition duration-300 border-t border-l first:border-l-0 border-pink-100 stroke-slate-500 text-slate-500">
-                                    <div className="flex items-center gap-4">
+                                <td className="h-10 md:h-12 px-4 md:px-6 text-sm md:text-base">
+                                    <div className="flex items-center gap-2 md:gap-4">
                                         {editingUserId === user._id ? (
                                             <>
                                                 <button
                                                     onClick={() => handleRoleChange(user._id)}
-                                                    className="text-green-500 hover:text-green-600 font-medium cursor-pointer transition-colors"
+                                                    className="text-green-600 hover:text-green-700 font-medium cursor-pointer transition-colors"
                                                 >
                                                     Save
                                                 </button>

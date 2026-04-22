@@ -65,7 +65,7 @@ const ProductGallery = () => {
               <img
                 src={Array.isArray(item.image) ? item.image[0] : item.image}
                 alt={`Gallery image ${index + 1}`}
-                className="w-full h-44 sm:h-60 md:h-72 lg:h-96 object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full aspect-[4/5] sm:aspect-[3/4] md:aspect-auto h-auto md:h-72 lg:h-96 object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           ))}

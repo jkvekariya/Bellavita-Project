@@ -77,19 +77,19 @@ const FilterSortBar = ({ products, onFilteredSorted }) => {
 
   return (
     <div className="w-full relative">
-      <div ref={dropdownRef} className="flex flex-wrap sm:flex-nowrap  items-center border border-black w-full sm:w-fit text-sm font-semibold z-10">
-        <button className="bg-black text-white px-4 py-2 uppercase tracking-widest w-full sm:w-auto" onClick={handleFilterClick}>
-          Filter <span className="ml-1">+</span>
+      <div ref={dropdownRef} className="flex items-center border border-black w-full sm:w-fit text-xs sm:text-sm font-semibold z-10">
+        <button className="bg-black text-white px-2 sm:px-4 py-2 uppercase tracking-widest w-1/2 sm:w-auto flex items-center justify-center gap-1 h-full" onClick={handleFilterClick}>
+          Filter <span>+</span>
         </button>
 
-        <div className="relative w-full sm:w-auto">
+        <div className="relative w-1/2 sm:w-auto h-full border-l border-black">
           <button
             onClick={() => showFilters ? setShowFilters(false) : setDropdownOpen(!dropdownOpen)}
-            className="relative overflow-hidden px-4 py-2 text-sm tracking-widest uppercase group flex items-center justify-between w-full"
+            className="relative overflow-hidden px-2 sm:px-4 py-2 uppercase group flex items-center justify-between w-full h-full bg-white"
           >
             <span className="relative z-10 text-black group-hover:text-white flex justify-between items-center w-full">
               Sort By
-              <svg className="w-4 h-4 ml-20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-2 sm:ml-20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </span>

@@ -45,7 +45,7 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const navLinkClass = (path) =>
-    `relative uppercase tracking-widest px-1 pb-1
+    `relative uppercase tracking-widest px-1 pb-1 whitespace-nowrap
      ${location.pathname === path ? "text-black font-medium" : "text-gray-700"}
      after:block after:h-[1px] after:bg-gray-400
      after:scale-x-0 hover:after:scale-x-100
@@ -147,7 +147,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <nav className="hidden md:flex justify-center space-x-8 text-xs font-medium py-2">
+          <nav className="hidden md:flex flex-wrap justify-center gap-x-4 lg:gap-x-8 gap-y-2 text-xs font-medium py-2">
             <Link to="/" className={navLinkClass("/")}>HOME</Link>
             <Link to="/allproduct" className={navLinkClass("/allproduct")}>Shop All</Link>
 

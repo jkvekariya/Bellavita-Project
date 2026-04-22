@@ -88,53 +88,53 @@ const ProductDetail = () => {
   );
 
   return (
-    <div>
-      <div className="py-5 flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-800 ml-10">All Products</h1>
+    <div className="p-2 md:p-4 bg-white min-h-screen">
+      <div className="py-3 md:py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <h1 className="text-xl md:text-3xl font-bold text-gray-800 ml-2 md:ml-10">All Products</h1>
         <button
-          className="px-5 py-2 bg-gray-100 font-semibold border border-gray-200 hover:bg-white mr-10"
+          className="px-4 py-1.5 md:px-5 md:py-2 bg-gray-100 font-semibold border border-gray-200 hover:bg-white mr-2 md:mr-10 rounded text-sm md:text-base w-full sm:w-auto"
           onClick={() => navigate("/AddProduct")}
         >
           Add Product
         </button>
       </div>
 
-      <div className="flex justify-end px-10 mb-4">
+      <div className="flex flex-col sm:flex-row justify-end px-2 md:px-10 mb-4 items-center">
         <input
           type="text"
           placeholder="Search product by name..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-80 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
+          className="w-full sm:w-80 px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black text-sm md:text-base"
         />
       </div>
 
-      <div className="w-full overflow-x-auto">
-        <table className="w-full text-left border border-collapse sm:border-separate border-gray-200 text-pink-400">
-          <thead>
+      <div className="w-full overflow-x-auto shadow-sm rounded-lg border border-gray-200 mx-2 md:mx-10" style={{ width: 'auto' }}>
+        <table className="w-full text-left border-collapse text-gray-600 min-w-max">
+          <thead className="bg-gray-100 text-gray-700">
             <tr>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">S.No</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Image</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Product Name</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Real Price</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Discount Price</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Category</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Collection</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Rating</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Reviews</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Date</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Edit</th>
-              <th className="h-12 px-6 bg-gray-100 text-gray-700 font-bold">Delete</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">S.No</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Image</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Product Name</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Real Price</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Discount Price</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Category</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Collection</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Rating</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Reviews</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Date</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Edit</th>
+              <th className="h-10 md:h-12 px-3 md:px-6 font-bold border-b border-gray-200 text-sm md:text-base whitespace-nowrap">Delete</th>
             </tr>
           </thead>
           <tbody>
             {filteredProducts.map((product, index) => (
-              <tr key={product._id} className="text-gray-700">
-                <td className="px-6 py-3 border-t border-gray-200">{index + 1}.</td>
-                <td className="h-12 px-6 border-t border-l border-gray-200">
-                  <div className="flex justify-center bg-gray-50 rounded-lg p-1">
+              <tr key={product._id} className="text-gray-700 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0">
+                <td className="px-3 md:px-6 py-2 md:py-3 text-sm md:text-base whitespace-nowrap">{index + 1}.</td>
+                <td className="h-10 md:h-12 px-3 md:px-6 text-sm md:text-base whitespace-nowrap">
+                  <div className="flex justify-center bg-white rounded-lg p-1 border border-gray-100">
                     <img
-                      className="w-20 h-20 object-contain mix-blend-multiply"
+                      className="w-12 h-12 md:w-16 md:h-16 object-contain mix-blend-multiply"
                       src={Array.isArray(product.image) ? product.image[0] : product.image}
                       alt={product.name}
                       onError={(e) => {
@@ -143,22 +143,24 @@ const ProductDetail = () => {
                     />
                   </div>
                 </td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.name}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.realprice}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.discountprice}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.category}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.collection}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.rating}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.reviews}</td>
-                <td className="px-6 py-3 border-t border-l border-gray-200 capitalize">{product.createdAt}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.name}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.realprice}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.discountprice}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.category}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.collection}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.rating}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">{product.reviews}</td>
+                <td className="px-3 md:px-6 py-2 md:py-3 capitalize text-sm md:text-base whitespace-nowrap">
+                    {new Date(product.createdAt).toLocaleDateString()}
+                </td>
                 <td
-                  className="px-6 py-3 border-t border-l border-gray-200 text-green-500 cursor-pointer"
+                  className="px-3 md:px-6 py-2 md:py-3 text-green-600 font-medium cursor-pointer hover:underline text-sm md:text-base whitespace-nowrap"
                   onClick={() => navigate(`/updateProduct/${product._id}`)}
                 >
                   Edit
                 </td>
                 <td
-                  className="px-6 py-3 border-t border-l border-gray-200 text-red-500 cursor-pointer"
+                  className="px-3 md:px-6 py-2 md:py-3 text-red-500 font-medium cursor-pointer hover:underline text-sm md:text-base whitespace-nowrap"
                   onClick={() => handleDelete(product._id)}
                 >
                   Delete
